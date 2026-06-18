@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Referanslar from '../components/referanslar.astro';
+import Instagram from '../components/instagram.astro';
 ---
 
 <Layout>
@@ -284,6 +285,8 @@ import Referanslar from '../components/referanslar.astro';
   </section>
 
   <Referanslar />
+
+  <Instagram />
 </Layout>
 
 <script>
@@ -307,7 +310,7 @@ import Referanslar from '../components/referanslar.astro';
     });
   });
 
-  // 2. Simülatör Hesaplama Sistemi
+  // 2. YENİ Simülatör Hesaplama Sistemi
   const btn = document.getElementById('sim-btn');
   const container = document.getElementById('sim-results-container');
   const badge = document.getElementById('risk-badge');
@@ -326,6 +329,7 @@ import Referanslar from '../components/referanslar.astro';
       let results = [];
       let isHighRisk = false;
 
+      // 1. Yangın Kaçış Merdiveni Mantığı
       if (floors > 2 || area > 500 || ['otel', 'hastane', 'yurt', 'okul', 'anaokulu'].includes(type)) {
         results.push({
           status: 'fail',
@@ -341,6 +345,7 @@ import Referanslar from '../components/referanslar.astro';
         });
       }
 
+      // 2. Sprinkler (Yağmurlama) Sistemi
       let sprinklerZorunlu = false;
       if (['hastane', 'anaokulu'].includes(type)) sprinklerZorunlu = true;
       if (['otel', 'yurt', 'okul'].includes(type) && (floors > 2 || area > 2000)) sprinklerZorunlu = true;
@@ -362,6 +367,7 @@ import Referanslar from '../components/referanslar.astro';
         });
       }
 
+      // 3. Yangın Algılama ve Tahliye
       if (['hastane', 'otel', 'yurt', 'anaokulu', 'okul'].includes(type) || area > 1000) {
         results.push({
           status: 'fail',
@@ -376,6 +382,7 @@ import Referanslar from '../components/referanslar.astro';
         });
       }
 
+      // Sonuçları Ekrana Basma
       container.innerHTML = '';
       results.forEach(r => {
         const icon = r.status === 'fail' 
@@ -393,6 +400,7 @@ import Referanslar from '../components/referanslar.astro';
         `;
       });
 
+      // Tehlike Sınıfı ogulama Barem Güncelleme
       if (isHighRisk || ['hastane', 'otel', 'yurt', 'okul', 'anaokulu'].includes(type)) {
         badge.className = "bg-red-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full";
         badge.innerText = "YÜKSEK TEHLİKE SINIFI";
@@ -406,6 +414,7 @@ import Referanslar from '../components/referanslar.astro';
       }
     });
 
+    // Sayfa açıldığında varsayılan değerlerle 1 kez çalıştır
     setTimeout(() => btn.click(), 100);
   }
 </script>
