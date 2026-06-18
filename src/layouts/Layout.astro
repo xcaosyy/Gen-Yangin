@@ -1,9 +1,6 @@
 ---
 import '../styles/global.css';
 const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", description = "Fabrika ve Oteller İçin Mevzuata Uygun Yangın Danışmanlığı & Anahtar Teslim Yapısal Çözümler" } = Astro.props;
-
-// Aktif sayfayı yakalamak için url yolunu alıyoruz
-const currentPath = Astro.url.pathname;
 ---
 
 <html lang="tr" class="scroll-smooth">
@@ -17,60 +14,40 @@ const currentPath = Astro.url.pathname;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style is:global>
-      /* --- MASAÜSTÜ YANGIN EFEKTİ --- */
-      .burning-link {
-        position: relative;
-        color: #475569;
-        transition: all 0.3s ease;
-      }
-      .burning-link.active, .burning-link:hover {
-        color: #ef4444 !important;
-        text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
-      }
-
-      /* --- MOBİL MENÜ LİNKLERİ (KOR EFEKTİ) --- */
-      .mobile-link {
-        color: rgba(255, 255, 255, 0.8);
-        transition: all 0.2s ease;
-      }
-      .mobile-link.active, .mobile-link:hover {
-        color: #fde047 !important; /* Aktif link sarı kor gibi parlayacak */
-        text-shadow: 0 0 15px #f97316, 0 0 25px #ef4444;
-        transform: scale(1.05);
-      }
-
-      /* Hamburger Çizgilerinin Açılış Animasyonu */
-      #menu-btn.open .line-1 { transform: rotate(45deg) translate(5px, 5px); background-color: #ffffff; }
-      #menu-btn.open .line-2 { opacity: 0; }
-      #menu-btn.open .line-3 { transform: rotate(-45deg) translate(5px, -5px); background-color: #ffffff; }
-    </style>
   </head>
   <body class="bg-slate-50 text-slate-800 font-['Plus_Jakarta_Sans',sans-serif] antialiased min-h-screen flex flex-col justify-between pt-20">
 
-    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-slate-200/80 z-50">
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-slate-200/80 z-40">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         
         <div class="flex items-center gap-4">
-          <button id="menu-btn" class="flex flex-col justify-between w-6 h-4 md:hidden z-50 focus:outline-none" aria-label="Menü">
-            <span class="line-1 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
-            <span class="line-2 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
-            <span class="line-3 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
+          <button id="menu-open-btn" class="md:hidden p-1 focus:outline-none" aria-label="Menüyü Aç">
+            <svg class="w-7 h-7 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           </button>
-
-          <a href="/" class="group flex flex-col z-50">
+          
+          <a href="/" class="group flex flex-col">
             <span class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">GEN <span class="text-red-600">YANGIN</span></span>
             <span class="text-[8px] sm:text-[9px] text-slate-500 font-bold tracking-widest uppercase mt-0.5">DANIŞMANLIK & YAPI ÇÖZÜMLERİ</span>
           </a>
         </div>
         
-        <nav class="hidden md:flex items-center gap-6 text-sm font-bold">
-          <a href="/" class={`burning-link ${currentPath === '/' ? 'active' : ''}`}>Anasayfa</a>
-          <a href="/hakkimizda" class={`burning-link ${currentPath === '/hakkimizda' ? 'active' : ''}`}>Hakkımızda</a>
-          <a href="/hizmetler" class={`burning-link ${currentPath === '/hizmetler' ? 'active' : ''}`}>Hizmetler</a>
-          <a href="/yonetmelik" class={`burning-link ${currentPath === '/yonetmelik' ? 'active' : ''}`}>Yönetmelik</a>
-          <a href="/iletisim" class={`burning-link ${currentPath === '/iletisim' ? 'active' : ''}`}>İletişim</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
+          <a href="/" class="hover:text-red-600 transition">Anasayfa</a>
+          <a href="/hakkimizda" class="hover:text-red-600 transition">Hakkımızda</a>
+          <a href="/hizmetler" class="hover:text-red-600 transition">Hizmetler</a>
+          <a href="/yonetmelik" class="hover:text-red-600 transition">Yönetmelik</a>
+          
+          <div class="relative group py-6">
+            <a href="#" class="hover:text-red-600 transition flex items-center gap-1">
+              Mevzuat & Bilgi <span class="text-[10px]">▼</span>
+            </a>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="/yangin-mevzuati-revizyonlari" class="block px-5 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-red-600 transition">📊 Mevzuat Revizyonları & Tarihçe</a>
+              <a href="/yangin-sozlugu" class="block px-5 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-red-600 transition font-bold text-red-600">📖 Yangın Terimleri Sözlüğü</a>
+            </div>
+          </div>
+
+          <a href="/iletisim" class="hover:text-red-600 transition">İletişim</a>
         </nav>
 
         <div class="hidden md:flex items-center gap-3">
@@ -81,27 +58,33 @@ const currentPath = Astro.url.pathname;
             💬 Ücretsiz Ön Keşif
           </a>
         </div>
-      </div>
 
-      <div id="mobile-menu" class="fixed inset-0 bg-gradient-to-br from-red-700 via-orange-600 to-red-900 z-40 flex flex-col justify-center items-center transition-all duration-300 transform -translate-x-full opacity-0 pointer-events-none md:hidden">
-        <nav class="flex flex-col items-center gap-6 text-xl font-black tracking-wide pt-12">
-          <a href="/" class={`mobile-link text-2xl ${currentPath === '/' ? 'active' : ''}`}>Anasayfa</a>
-          <a href="/hakkimizda" class={`mobile-link text-2xl ${currentPath === '/hakkimizda' ? 'active' : ''}`}>Hakkımızda</a>
-          <a href="/hizmetler" class={`mobile-link text-2xl ${currentPath === '/hizmetler' ? 'active' : ''}`}>Hizmetler</a>
-          <a href="/yonetmelik" class={`mobile-link text-2xl ${currentPath === '/yonetmelik' ? 'active' : ''}`}>Yönetmelik</a>
-          <a href="/yangin-mevzuati-revizyonlari" class={`mobile-link text-lg ${currentPath === '/yangin-mevzuati-revizyonlari' ? 'active' : ''}`}>📊 Mevzuat Revizyonları</a>
-          <a href="/yangin-sozlugu" class={`mobile-link text-lg ${currentPath === '/yangin-sozlugu' ? 'active' : ''}`}>📖 Yangın Sözlüğü</a>
-          <a href="/iletisim" class={`mobile-link text-2xl ${currentPath === '/iletisim' ? 'active' : ''}`}>İletişim</a>
-          
-          <div class="w-32 h-px bg-white/20 my-2"></div>
-          
-          <a href="https://wa.me/905336626210" target="_blank" class="bg-white text-red-700 hover:bg-slate-100 px-8 py-3 rounded-2xl text-base font-extrabold flex items-center gap-2 transition shadow-2xl animate-pulse">
-            💬 Ücretsiz Ön Keşif
-          </a>
-          <a href="tel:+905336626210" class="text-xs font-bold text-white/70 mt-2">📞 0 533 662 62 10</a>
-        </nav>
       </div>
     </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-gradient-to-br from-red-700 via-red-600 to-red-900 z-50 flex-col items-center justify-center transition-transform duration-300 transform -translate-x-full hidden md:hidden">
+      
+      <button id="menu-close-btn" class="absolute top-6 right-6 text-white p-2 focus:outline-none" aria-label="Menüyü Kapat">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <nav class="flex flex-col items-center gap-6 text-xl font-black tracking-wide w-full px-6 text-white">
+        <a href="/" class="hover:text-yellow-300 transition-colors">Anasayfa</a>
+        <a href="/hakkimizda" class="hover:text-yellow-300 transition-colors">Hakkımızda</a>
+        <a href="/hizmetler" class="hover:text-yellow-300 transition-colors">Hizmetler</a>
+        <a href="/yonetmelik" class="hover:text-yellow-300 transition-colors">Yönetmelik</a>
+        <a href="/yangin-mevzuati-revizyonlari" class="text-lg text-white/90 hover:text-yellow-300 transition-colors">📊 Mevzuat Revizyonları</a>
+        <a href="/yangin-sozlugu" class="text-lg text-white/90 hover:text-yellow-300 transition-colors">📖 Yangın Sözlüğü</a>
+        <a href="/iletisim" class="hover:text-yellow-300 transition-colors">İletişim</a>
+        
+        <div class="w-32 h-px bg-white/20 my-2"></div>
+        
+        <a href="https://wa.me/905336626210" target="_blank" class="bg-white text-red-700 px-8 py-3 rounded-2xl text-base font-extrabold flex items-center gap-2 shadow-2xl">
+          💬 Ücretsiz Ön Keşif
+        </a>
+        <a href="tel:+905336626210" class="text-sm font-bold text-white/70 mt-2">📞 0 533 662 62 10</a>
+      </nav>
+    </div>
 
     <main class="flex-grow">
       <slot />
@@ -139,24 +122,29 @@ const currentPath = Astro.url.pathname;
     </footer>
 
     <script>
-      const menuBtn = document.getElementById('menu-btn');
+      const openBtn = document.getElementById('menu-open-btn');
+      const closeBtn = document.getElementById('menu-close-btn');
       const mobileMenu = document.getElementById('mobile-menu');
 
-      if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-          menuBtn.classList.toggle('open');
-          
-          if (mobileMenu.classList.contains('-translate-x-full')) {
-            // Soldan Sağa Açılış penceresi
-            mobileMenu.classList.remove('-translate-x-full', 'opacity-0', 'pointer-events-none');
-            mobileMenu.classList.add('translate-x-0', 'opacity-100', 'pointer-events-auto');
+      if (openBtn && closeBtn && mobileMenu) {
+        openBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('flex');
+          // CSS transform çalışması için milisaniyelik gecikme
+          setTimeout(() => {
+            mobileMenu.classList.remove('-translate-x-full');
             document.body.style.overflow = 'hidden';
-          } else {
-            // Kapanış penceresi
-            mobileMenu.classList.remove('translate-x-0', 'opacity-100', 'pointer-events-auto');
-            mobileMenu.classList.add('-translate-x-full', 'opacity-0', 'pointer-events-none');
-            document.body.style.overflow = '';
-          }
+          }, 10);
+        });
+
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.add('-translate-x-full');
+          document.body.style.overflow = '';
+          // Animasyon bitince ekranı temizle
+          setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+          }, 300);
         });
       }
     </script>
