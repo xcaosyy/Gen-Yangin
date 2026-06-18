@@ -1,242 +1,435 @@
 ---
-// index.astro - Gen Yangın Danışmanlık Resmi Web Sitesi
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="tr">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Gen Yangın | Profesyonel Yangın Güvenliği ve Mühendislik Danışmanlığı</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-50 text-slate-900 font-['Inter',sans-serif] scroll-smooth">
-
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md shadow-red-200">G</div>
-          <span class="font-['Poppins',sans-serif] font-bold text-xl tracking-tight text-slate-800">GEN<span class="text-red-600">YANGIN</span></span>
-        </div>
-        <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
-          <a href="#hizmetler" class="hover:text-red-600 transition-colors">Hizmetlerimiz</a>
-          <a href="#simulator" class="hover:text-red-600 transition-colors">Akıllı Simülatör</a>
-          <a href="#referanslar" class="hover:text-red-600 transition-colors">Saha Çalışmaları</a>
-          <a href="#iletisim" class="bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-red-600 transition-all shadow-sm">İletişime Geç</a>
-        </nav>
+<Layout>
+  <section class="relative py-24 md:py-32 overflow-hidden bg-white">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-red-50),_transparent_50%)]"></div>
+    <div class="max-w-6xl mx-auto px-6 relative z-10 text-center">
+      <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-red-50 text-red-600 uppercase tracking-wider mb-6 border border-red-100 shadow-sm">
+        Yönetmelik Engellerine Takılmayın!
+      </span>
+      <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-4xl mx-auto mb-6">
+        İşletmeniz Yangın Yönetmeliğine ve Denetimlere Ne Kadar Hazır?
+      </h1>
+      <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Fabrika ve oteller için mevzuata uygun yangın danışmanlığı ve anahtar teslim yapısal çözümlerle denetimlerden tek seferde geçin.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="https://wa.me/905336626210" target="_blank" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center">
+          Projeniz İçin Teknik Danışmanlık Alın 🧠
+        </a>
+        <a href="/hizmetler" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold px-8 py-4 rounded-xl transition text-center border border-slate-200">
+          Sektörel Çözümlerimiz & Standartlar 🏢
+        </a>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <section class="relative bg-slate-900 text-white py-24 overflow-hidden">
-      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e11d48_1px,transparent_1px)] [background-size:16px_16px]"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-3xl">
-          <span class="inline-block bg-red-600/20 text-red-400 font-semibold text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-red-500/30 mb-6">
-            Binaların Yangından Korunması Hakkında Yönetmelik Uyumlu
-          </span>
-          <h1 class="font-['Poppins',sans-serif] text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-6">
-            Yangın Güvenliğinde <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">Mühendislik ve Danışmanlık</span> Çözümleri
-          </h1>
-          <p class="text-slate-300 text-lg mb-8 max-w-2xl leading-relaxed">
-            İşletmenizi, projelerinizi ve varlıklarınızı yasal mevzuatlara tam uyumlu, uluslararası standartlarda (NFPA) yangın güvenlik danışmanlığı, risk analizi ve saha denetimleri ile güvence altına alıyoruz.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a href="#iletisim" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3.5 rounded-lg transition-all shadow-lg shadow-red-900/30">Ücretsiz Ön Danışmanlık Al</a>
-            <a href="#hizmetler" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-6 py-3.5 rounded-lg border border-slate-700 transition-all">Hizmetlerimizi İncele</a>
-          </div>
-        </div>
+  <section id="mevzuat-simulatoru" class="py-24 px-6 bg-slate-50 border-t border-slate-200 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-12">
+        <span class="bg-red-50 text-red-600 text-[10px] sm:text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full border border-red-200">
+          GEN YANGIN | MEVZUAT ANALİZ SİMÜLATÖRÜ
+        </span>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-900 mt-6 tracking-tight">Mevzuat Risk ve Altyapı Hesaplayıcı</h2>
+        <p class="text-slate-500 mt-4 max-w-2xl mx-auto font-medium">
+          Yasal olarak hangi sistemleri kurmak zorunda olduğunuzu ve tahmini bütçe bareminizi binaların yangından korunması hakkında yönetmelik kriterlerine göre anında simüle edin.
+        </p>
       </div>
-    </section>
 
-    <section id="hizmetler" class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="font-['Poppins',sans-serif] text-3xl font-bold text-slate-900 mb-4">Uzmanlık Alanlarımız ve Hizmetlerimiz</h2>
-          <p class="text-slate-500">Yangın güvenliğinin her aşamasında profesyonel mühendislik çözümleri sunuyoruz.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-100 hover:bg-white hover:shadow-xl transition-all group">
-            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.25 2.25 0 0 1 10.5 2.25h4.5a2.25 2.25 0 0 1 2.25 2.25M9.374 21c.067-.21.1-.433.1-.664 0-.414-.336-.75-.75-.75h-4.5a.75.75 0 0 0-.75.75 2.25 2.25 0 0 0 .1.664m5.8 0A2.25 2.25 0 0 0 10.5 21.75h4.5a2.25 2.25 0 0 0 2.25-2.25M3.75 16.5v2.25A2.25 2.25 0 0 0 6 21h.75m0-18H6A2.25 2.25 0 0 0 3.75 5.25v2.25m9-3h.008v.008H12.75V3.75Zm0 3h.008v.008H12.75V6.75Zm0 3h.008v.008H12.75V9.75Zm0 3h.008v.008H12.75v-.008ZM12.75 15.75h.008v.008H12.75v-.008Zm0 3h.008v.008H12.75v-.008Z" /></svg>
-            </div>
-            <h3 class="font-['Poppins',sans-serif] font-bold text-xl text-slate-800 mb-3">Yangın Risk Analizi & Raporlama</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Mevcut binalarınızda ve endüstriyel tesislerinizde yangın risklerini yerinde inceliyor, yasal mevzuatlara uygun detaylı durum tespit raporları hazırlıyoruz.</p>
-          </div>
-          <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-100 hover:bg-white hover:shadow-xl transition-all group">
-            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091.555.088 1.17-.137 1.718L8.622 11.73m0 0-3.309 3.309a4.5 4.5 0 0 1-4.308-4.293 4.5 4.5 0 0 1 6.745-4.443l-3.283 3.283a3.001 3.001 0 0 0 2.25 2.25l3.283-3.283c.002.011.01.015.01.027Z" /></svg>
-            </div>
-            <h3 class="font-['Poppins',sans-serif] font-bold text-xl text-slate-800 mb-3">Proje ve Ruhsat Danışmanlığı</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Belediye ve İtfaiye ruhsat süreçleriniz için mimari, mekanik ve elektrik projelerin yangın yönetmeliğine uygunluğunu denetliyor, onay süreçlerini hızlandırıyoruz.</p>
-          </div>
-          <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-100 hover:bg-white hover:shadow-xl transition-all group">
-            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.053-.462-.037-.933.052-1.386a6.002 6.002 0 0 1 11.354-2.128M4.26 10.174a6.001 6.001 0 0 0 10.985 3.148M4.26 10.174A5.985 5.985 0 0 1 4 8c0-1.007.25-1.956.69-2.791m13.435 5.174c.053-.462.037-.933-.052-1.386a6.002 6.002 0 0 0-11.354-2.128m11.354 3.514a6.001 6.001 0 0 1-10.985 3.148m10.985-3.148A5.985 5.985 0 0 0 20 8c0-1.007-.25-1.956-.69-2.791m-10.455 13.1a3.001 3.001 0 0 1-5.617-1.303m5.617 1.303a3.001 3.001 0 0 0 5.617-1.303m-5.617 1.303v2.25m5.617-3.514V21" /></svg>
-            </div>
-            <h3 class="font-['Poppins',sans-serif] font-bold text-xl text-slate-800 mb-3">Sistem Performans Testleri</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Yangın pompaları, sprinkler sistemleri, yangın hidrantları ve algılama sistemlerinin işlevsellik testlerini yaparak çalışırlık durumlarını sertifikalandırıyoruz.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="simulator" class="py-20 bg-slate-50 border-t border-b border-slate-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="font-['Poppins',sans-serif] text-3xl font-bold text-slate-900 mb-4">Mevzuata Uygunluk Akıllı Simülatörü</h2>
-          <p class="text-slate-500">Sektörünüzü seçerek binanızın veya tesisinizin yasal olarak uyması gereken temel zorunlulukları anında simüle edin.</p>
-        </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <div class="max-w-4xl mx-auto bg-slate-900 rounded-3xl shadow-2xl border border-slate-800 overflow-hidden">
-          <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-red-500"></span>
-              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-              <span class="w-3 h-3 rounded-full bg-green-500"></span>
-              <span class="text-xs text-slate-500 font-mono ml-2">yangin_mevzuat_simulatoru.exe</span>
-            </div>
-            <span class="text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded">Canlı Mod</span>
-          </div>
-          <div class="p-8">
-            <p class="text-sm text-slate-400 mb-4 font-medium uppercase tracking-wider text-center">Lütfen Sektörünüzü/Bina Tipinizi Seçiniz:</p>
+        <div class="lg:col-span-5 bg-white border border-slate-200 shadow-xl shadow-slate-200/50 rounded-3xl p-6 md:p-8">
+          <div class="space-y-6">
             
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-              <button class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:border-red-500 hover:bg-slate-800/80 transition-all font-medium text-sm flex flex-col items-center gap-2">
-                🏫 <span>Okul</span>
-              </button>
-              <button class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:border-red-500 hover:bg-slate-800/80 transition-all font-medium text-sm flex flex-col items-center gap-2">
-                🏥 <span>Hastane</span>
-              </button>
-              <button class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:border-red-500 hover:bg-slate-800/80 transition-all font-medium text-sm flex flex-col items-center gap-2">
-                🏢 <span>Yurt</span>
-              </button>
-              <button class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:border-red-500 hover:bg-slate-800/80 transition-all font-medium text-sm flex flex-col items-center gap-2">
-                🧸 <span>Anaokulu</span>
-              </button>
+            <div>
+              <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2">1. İŞLETME YAPI TÜRÜ</label>
+              <select id="sim-type" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm font-bold rounded-xl px-4 py-3.5 focus:outline-none focus:border-slate-400 transition">
+                <option value="otel">🏨 Otel / Konaklama Tesisi</option>
+                <option value="fabrika">🏭 Fabrika / İmalathane</option>
+                <option value="depo">📦 Endüstriyel Depo / Antrepo</option>
+                <option value="otopark">🚗 Kapalı Otopark Alanı</option>
+                <option value="okul">🏫 Okul / Eğitim Kurumu</option>
+                <option value="hastane">🏥 Hastane / Sağlık Tesisi</option>
+                <option value="yurt">🛏️ Öğrenci Yurdu / Pansiyon</option>
+                <option value="anaokulu">🧸 Anaokulu / Kreş</option>
+              </select>
             </div>
 
-            <div class="bg-slate-950 rounded-2xl p-6 border border-slate-800 text-slate-300 font-mono text-xs space-y-2 leading-relaxed">
-              <p class="text-green-400 font-bold">// Sistem Analizi Başlatıldı...</p>
-              <p>Örnek bina verisi yükleniyor. Seçilen sektöre ait zorunlu algılama, acil yönlendirme, sprinkler ve kaçış yolu standartları BYKHY (Binaların Yangından Korunması Hakkında Yönetmelik) maddelerine göre dinamik olarak listelenecektir.</p>
-              <p class="text-amber-400 font-semibold">[Bilgi] İlgili sektöre tıklayarak canlı kriter analizi yapabilirsiniz.</p>
+            <div>
+              <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2">2. TOPLAM KAPALI ALAN (M²)</label>
+              <input type="number" id="sim-area" value="1000" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm font-bold rounded-xl px-4 py-3.5 focus:outline-none focus:border-slate-400 transition" />
             </div>
+
+            <div>
+              <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2">3. TOPLAM KAT SAYISI</label>
+              <input type="number" id="sim-floors" value="2" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm font-bold rounded-xl px-4 py-3.5 focus:outline-none focus:border-slate-400 transition" />
+            </div>
+
+            <button id="sim-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-4 rounded-xl transition flex items-center justify-center gap-2 mt-4">
+              Mevzuat Analizini Başlat <span class="text-orange-500">⚡</span>
+            </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="referanslar" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="text-red-600 font-bold text-xs uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full mb-3 inline-block">
-            Güven Veren Ortaklıklar
-          </span>
-          <h2 class="font-['Poppins',sans-serif] text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Saha Çalışmalarımız & Referanslarımız
-          </h2>
-          <div class="w-12 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
-          <p class="text-slate-500 mt-4 text-base">
-            Manisa ve çevre illerde yangın güvenliği danışmanlığı, risk analizi ve teknik denetimlerini başarıyla tamamladığımız seçkin markalar, oteller ve eğitim kurumları.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="lg:col-span-7 bg-[#0f172a] border-t-[6px] border-red-600 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden flex flex-col h-full min-h-[400px]">
           
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🏨
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Tütün Otel</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Turizm & Konaklama</span>
+          <div class="flex items-center justify-between border-b border-slate-700/50 pb-5 mb-5">
+            <h3 class="text-white font-bold text-lg flex items-center gap-2">
+              📋 Yasal Zorunluluk Simülasyonu
+            </h3>
+            <span id="risk-badge" class="bg-emerald-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full">STANDART TEHLİKE</span>
           </div>
 
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🏨
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Fayton Otel</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Turizm & Konaklama</span>
-          </div>
+          <div id="sim-results-container" class="space-y-3 flex-grow"></div>
 
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🏭
+          <div class="mt-6 pt-5 border-t border-slate-700/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-1">TAHMİNİ ALTYAPI YATIRIM BAREMİ</p>
+              <p id="sim-project-type" class="text-yellow-400 font-bold text-lg">Standart Tadilat Projesi</p>
             </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Klimasan</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Endüstriyel Üretim</span>
-          </div>
-
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🚜
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Tafe</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Tarım Makineleri & Sanayi</span>
-          </div>
-
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🎓
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Manisa Özel Sevgi Dünyası</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Özel Eğitim Kurumu</span>
-          </div>
-
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🏫
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Salihli Dore Okulları</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Eğitim Kampüsü</span>
-          </div>
-
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🧪
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Enta Plastik</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Plastik & Ambalaj Sanayi</span>
-          </div>
-
-          <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-xl hover:border-red-200 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-16 h-16 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center text-2xl font-bold mb-4 shadow-sm group-hover:scale-110 transition-transform">
-              🏗️
-            </div>
-            <h4 class="font-['Poppins',sans-serif] font-bold text-slate-800 text-base group-hover:text-red-600 transition-colors">Düzgün Panjur Sistemleri</h4>
-            <span class="text-xs text-slate-400 mt-1 font-medium bg-slate-100 group-hover:bg-red-50 group-hover:text-red-500 px-2.5 py-1 rounded-full transition-colors">Yapı & Otomasyon</span>
+            <a href="https://wa.me/905336626210" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-5 py-3 rounded-full transition flex items-center gap-2">
+              Yangın Danışmanından Teklif Al 💬
+            </a>
           </div>
 
         </div>
+      </div>
 
-        <div class="mt-12 p-4 rounded-xl bg-slate-50 text-center border border-slate-100 max-w-2xl mx-auto">
-          <p class="text-xs text-slate-500 font-medium">
-            🔒 Gizlilik sözleşmeleri ve güvenlik protokolleri gereğince, saha çalışması yürüttüğümüz bazı endüstriyel tesisler ve savunma sanayii partnerlerimiz burada listelenmemiştir.
+    </div>
+  </section>
+
+  <section class="py-20 bg-slate-900 text-white border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">İşletmeniz Risk Altında Mı?</h2>
+        <p class="text-slate-400 text-base md:text-lg">Resmi denetimlerde ve ruhsatlandırma süreçlerinde işletmeleri en çok zor durumda bırakan ve cezai müeyyidelere yol açan eksiklikler:</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+          <div class="text-red-500 text-2xl mb-3">⚠️</div>
+          <h3 class="text-xl font-bold mb-2">Hatalı Kaçış Yolları</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Kaçış mesafelerinin yönetmeliğe uygun hesaplanmaması, genişlik standartlarına uyulmaması ve çıkış yollarının engellenmiş olması.</p>
+        </div>
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+          <div class="text-red-500 text-2xl mb-3">⚠️</div>
+          <h3 class="text-xl font-bold mb-2">Standart Dışı Yangın Merdivenleri</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Konumu, basamak genişliği, rıht yüksekliği veya malzemesi yönetmelik kriterlerini karşılamayan hatalı yapılar.</p>
+        </div>
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+          <div class="text-red-500 text-2xl mb-3">⚠️</div>
+          <h3 class="text-xl font-bold mb-2">Yanlış Yangın Kapısı Seçimi</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Sertifikasız, yangın dayanım süresi yetersiz olan veya kaçış yönünün tersine açılan kapıların kullanılması.</p>
+        </div>
+        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+          <div class="text-red-500 text-2xl mb-3">⚠️</div>
+          <h3 class="text-xl font-bold mb-2">Eksik Eğitim ve Risk Analizleri</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Personelin acil durum senaryolarından habersiz olması ve yasal olarak bulundurulması gereken yangın eğitimi belgelerinin eksikliği.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hakkimizda" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-red-600 font-bold tracking-wider text-sm uppercase">BİZ KİMİZ?</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-2">Neden Gen Yangın?</h2>
+      </div>
+      <div class="space-y-8 text-slate-600 leading-relaxed text-base">
+        <p class="text-slate-700 text-center max-w-2xl mx-auto">
+          Yangın güvenliği sektöründeki en büyük aksaklık; mevzuatı ve yasal yükümlülükleri bilen danışman kadrosu ile sahada imalat ve tadilatı gerçekleştiren uygulayıcı ekibin farklı dilleri konuşmasıdır. Gen Yangın, teorik mevzuat bilgisi ile saha pratiğini tek çatı altında birleştirerek bu kopukluğu tamamen ortadan kaldırır.
+        </p>
+        <div class="bg-red-50 p-8 rounded-2xl border border-red-100 my-6">
+          <h3 class="text-xl font-extrabold text-red-700 mb-3 text-center">Bizi Farklı Kılan Çift Yönlü Uzmanlığımız</h3>
+          <p class="text-slate-800 font-medium mb-4 text-center">
+            Firmamız, 3. Seviye Yangın Eğitici Eğitimi ve Yangın Risk Değerlendirme Eğitici Eğitimi yetkinlikleriyle işin yasal ve teorik altyapısını kusursuz kurar.
+          </p>
+          <p class="text-slate-700 text-center">
+            Aynı zamanda, müteahhitlik ve inşaat tecrübemiz sayesinde projenizin gerektirdiği tüm yapısal tadilatları (yangın merdiveni, yangın kapısı, kaçış yolları) bizzat imal ederek anahtar teslim çözer. En pratik ve en ekonomik alternatif mimari yolları geliştirir.
           </p>
         </div>
-
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="iletisim" class="py-20 bg-slate-900 text-white">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="font-['Poppins',sans-serif] text-3xl font-bold mb-4">Projenizin Yangın Güvenliğini Şansa Bırakmayın</h2>
-        <p class="text-slate-400 mb-8 max-w-xl mx-auto text-sm leading-relaxed">Manisa ve Ege Bölgesi başta olmak üzere tüm Türkiye'de yasal süreçleriniz ve denetimleriniz için profesyonel mühendislik desteği sağlamaya hazırız.</p>
-        <div class="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-800 p-2 rounded-2xl border border-slate-700 max-w-lg mx-auto w-full">
-          <span class="text-sm font-medium text-slate-300 px-4 py-2 sm:py-0">📧 info@genyangin.com</span>
-          <a href="mailto:info@genyangin.com" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-3 rounded-xl transition-all text-center">Hızlı Teklif Al</a>
+  <section class="py-20 bg-slate-50 border-t border-slate-200/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-red-600 font-bold tracking-wider text-sm uppercase">TEK MUHATAP, KESİN ÇÖZÜM</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-2">Hizmet Alanlarımız</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <div class="text-3xl mb-4">📋</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Mevzuat Danışmanlığı & Risk Analizi</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">İtfaiye uygunluk belgesi ve ruhsat öncesi eksiklerin resmi kriterlere göre detaylı raporlanması.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <div class="text-3xl mb-4">🚪</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Kaçış Yolları & Tahliye Planlaması</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Yönetmeliğe uygun kaçış rotalarının belirlenmesi, genişlik ve mesafe hesaplamalarının sıfır hata ile yapılması.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <div class="text-3xl mb-4">🏗️</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Yapısal Uygulamalar & Mimari Tadilat</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Statik hesabı yapılmış yangın merdiveni imalatı, sertifikalı yangın kapısı temini ve panik bar montajı.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <div class="text-3xl mb-4">🎓</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Eğitici Eğitimi & Belgelendirme</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Yasal olarak zorunlu personel yangın eğitimlerinin verilmesi, acil durum tatbikatları ve resmi belgelendirme.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="bg-slate-950 text-slate-500 py-8 border-t border-slate-900 text-center text-xs">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p>&copy; 2026 GEN YANGIN Danışmanlık & Mühendislik Hizmetleri. Tüm Hakları Saklıdır.</p>
+  <section class="py-20 bg-white border-t border-slate-200/60">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold bg-red-50 text-red-600 px-3 py-1.5 rounded-full uppercase tracking-wider">RESMİ ONAY YOL HARİTASI</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-4 mb-3">İtfaiye Uygunluk Raporu Süreç Şeması</h2>
+        <p class="text-slate-600 text-xs md:text-sm">İşletmenizin resmi yangın ruhsatı ve itfaiye onay belgesi süreçlerini çift yönlü uzmanlığımızla 4 adımda kusursuzca tamamlıyoruz.</p>
       </div>
-    </footer>
 
-  </body>
-</html>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative group transition hover:border-red-200">
+          <div class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center font-black text-sm mb-4 shadow-md shadow-red-500/20">01</div>
+          <h3 class="font-extrabold text-slate-900 text-sm md:text-base mb-2">Mimari Proje ve Risk Analizi</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Tesisinizin mevcut mimari projeleri <strong>Binaların Yangından Korunması Hakkında Yönetmelik</strong> kriterlerine göre incelenir, sahadaki yasal eksiklikler ve risk alanları tek tek raporlanır.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative group transition hover:border-red-200">
+          <div class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center font-black text-sm mb-4 shadow-md shadow-red-500/20">02</div>
+          <h3 class="font-extrabold text-slate-900 text-sm md:text-base mb-2">Mühendislik ve Alternatif Çözüm</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Gerekli kaçış mesafeleri, duman tahliye hatları ve sprinkler debi hesapları yapılır. İşletmeye en pratik ve maliyet açısından en ekonomik alternatif mimari yollar geliştirilir.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative group transition hover:border-red-200">
+          <div class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center font-black text-sm mb-4 shadow-md shadow-red-500/20">03</div>
+          <h3 class="font-extrabold text-slate-900 text-sm md:text-base mb-2">Anahtar Teslim Yapısal Uygulama</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">İnşaat ve müteahhitlik gücümüzle sahaya inilir; statik hesaplı çelik yangın merdivenleri, sertifikalı kapılar, panik barlar ve acil durum yönlendirmeleri tek elden eksiksiz imal edilir.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative group transition hover:border-red-200">
+          <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-black text-sm mb-4 shadow-md shadow-emerald-500/20">04</div>
+          <h3 class="font-extrabold text-slate-900 text-sm md:text-base mb-2">Resmi Başvuru ve Rapor Teslimi</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">Tüm yasal personel eğitimleri tamamlanarak dosya hazırlanır. Büyükşehir Belediyesi İtfaiye Daire Başkanlığı denetiminden tek seferde geçilerek <strong>İtfaiye Uygunluk Belgesi</strong> işletmeye teslim edilir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-slate-50 border-t border-slate-200/50">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-red-600 font-bold tracking-wider text-sm uppercase">YASAL KILAVUZ REHBERİ</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-2">Sıkça Sorulan Sorular</h2>
+        <p class="text-slate-600 text-xs md:text-sm mt-2">Yangın yönetmeliği, itfaiye onay süreçleri ve yapısal revizyonlar hakkında en çok merak edilen kurumsal sorular.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button class="faq-btn w-full px-6 py-4 text-left font-bold text-sm md:text-base text-slate-900 flex justify-between items-center bg-white hover:bg-slate-50/80 transition focus:outline-none">
+            <span>Mevcut eski binalar yeni yangın yönetmeliğinden muaf mıdır?</span>
+            <span class="faq-icon text-slate-400 transition-transform duration-200">▼</span>
+          </button>
+          <div class="faq-ans max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+            <p class="p-6 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Hayır, tamamen muaf değildir. Yönetmeliğin 10. Kısmına göre, mevcut binalarda kullanım amacı değiştiğinde, otel veya hastane gibi yüksek riskli bir işletmeye dönüştürüldüğünde ya da kapsamlı bir ruhsat tadilatı yapıldığında, binanın yeni mevzuat hükümlerine tam uyumlu hale getirilmesi yasal zorunluluktur.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button class="faq-btn w-full px-6 py-4 text-left font-bold text-sm md:text-base text-slate-900 flex justify-between items-center bg-white hover:bg-slate-50/80 transition focus:outline-none">
+            <span>İtfaiye Uygunluk Raporu alınırken en çok hangi hatalar yapılıyor?</span>
+            <span class="faq-icon text-slate-400 transition-transform duration-200">▼</span>
+          </button>
+          <div class="faq-ans max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+            <p class="p-6 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Saha tecrübelerimize göre en sık yapılan hatalar; sertifikasız ve yangın dayanım süresi dökümantasyonu olmayan yangın kapılarının takılması, acil çıkış yönlerinin ters planlanması, ölü koridor mesafelerinin aşılması ve statik hesabı yapılmamış güvensiz çelik merdiven imalatlarıdır. Bu hatalar ruhsat sürecini tamamen kilitler.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button class="faq-btn w-full px-6 py-4 text-left font-bold text-sm md:text-base text-slate-900 flex justify-between items-center bg-white hover:bg-slate-50/80 transition focus:outline-none">
+            <span>Tarihi tescilli yapılarda yangın merdiveni ve tadilat süreçleri nasıl yürütülür?</span>
+            <span class="faq-icon text-slate-400 transition-transform duration-200">▼</span>
+          </button>
+          <div class="faq-ans max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+            <p class="p-6 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Yönetmeliğin 167/C maddesi uyarınca, tarihi yapılarda özgün mimari dokunun ve estetiğin korunması esastır. Bu tür yapılarda standart imalatlar yerine, kurulların onaylayacağı, fiziki ve görsel yapıya zarar vermeyen gizli algılama, özel yalıtım bariyerleri ve mikroskobik söndürme projeleri hazırlanarak onay alınır.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <button class="faq-btn w-full px-6 py-4 text-left font-bold text-sm md:text-base text-slate-900 flex justify-between items-center bg-white hover:bg-slate-50/80 transition focus:outline-none">
+            <span>İşletmelerde acil durum eğitimi ve belgelendirmesi yaptırmak zorunlu mu?</span>
+            <span class="faq-icon text-slate-400 transition-transform duration-200">▼</span>
+          </button>
+          <div class="faq-ans max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-slate-50/50">
+            <p class="p-6 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Evet, yasaldır. Binaların Yangından Korunması Hakkında Yönetmelik ve İş Sağlığı Güvenliği kanununa göre, işletmelerde söndürme, kurtarma ve koruma ekiplerinin kurulması, personelin yılda en az bir kez acil durum ve tahliye eğitimi alarak bunun belgelendirilmesi zorunluluktur.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Saha Çalışmaları & Referanslar</h2>
+        <p class="text-slate-500 text-sm mt-2">Mühendislik hesaplarının sahada kusursuz işçiliğe dönüştüğü anlar ve kurumsal iş ortaklarımız.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
+        <div class="bg-slate-50 p-6 rounded-xl flex items-center justify-center text-slate-500 font-bold text-xs border border-slate-200 shadow-sm">🔒 Otel Kaçış Revizyonu</div>
+        <div class="bg-slate-50 p-6 rounded-xl flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-200 shadow-sm">🔒 Hastane Koridor Genişletme</div>
+        <div class="bg-slate-50 p-6 rounded-xl flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-200 shadow-sm">🔒 Fabrika Sprinkler Hattı</div>
+        <div class="bg-slate-50 p-6 rounded-xl flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-200 shadow-sm">🔒 Yangın Kapısı Montajı</div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center font-semibold text-slate-400 text-xs">
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">🏢 PRESTİJ OTEL GRUBU</div>
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">🏥 ÖZEL SAĞLIK MERKEZİ</div>
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">🏭 EGE ENTEGRE TEKSTİL</div>
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">🏢 GEN YAPI PROJELERİ</div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // 1. S.S.S. Açılıp Kapanma Mekanizması
+  const faqBtns = document.querySelectorAll('.faq-btn');
+  faqBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.nextElementSibling as HTMLDivElement;
+      const icon = btn.querySelector('.faq-icon') as HTMLSpanElement;
+      
+      if (ans.style.maxHeight && ans.style.maxHeight !== '0px') {
+        ans.style.maxHeight = '0px';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        document.querySelectorAll('.faq-ans').forEach(el => (el as HTMLDivElement).style.maxHeight = '0px');
+        document.querySelectorAll('.faq-icon').forEach(el => (el as HTMLSpanElement).style.transform = 'rotate(0deg)');
+        
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+
+  // 2. YENİ Simülatör Hesaplama Sistemi
+  const btn = document.getElementById('sim-btn');
+  const container = document.getElementById('sim-results-container');
+  const badge = document.getElementById('risk-badge');
+  const projectType = document.getElementById('sim-project-type');
+
+  if(btn && container && badge && projectType) {
+    btn.addEventListener('click', () => {
+      const typeElement = document.getElementById('sim-type') as HTMLSelectElement;
+      const areaElement = document.getElementById('sim-area') as HTMLInputElement;
+      const floorsElement = document.getElementById('sim-floors') as HTMLInputElement;
+
+      const type = typeElement ? typeElement.value : 'otel';
+      const area = areaElement ? parseInt(areaElement.value) || 0 : 0;
+      const floors = floorsElement ? parseInt(floorsElement.value) || 0 : 0;
+
+      let results = [];
+      let isHighRisk = false;
+
+      // 1. Yangın Kaçış Merdiveni Mantığı
+      if (floors > 2 || area > 500 || ['otel', 'hastane', 'yurt', 'okul', 'anaokulu'].includes(type)) {
+        results.push({
+          status: 'fail',
+          title: 'Yangın Kaçış Merdiveni Sınırı:',
+          desc: 'ZORUNLU (Madde 50): Kat sayısı ve kullanıcı yoğunluğu nedeniyle en az 2 alternatif çıkış merdiveni yapılması mecburidir.'
+        });
+        isHighRisk = true;
+      } else {
+        results.push({
+          status: 'pass',
+          title: 'Yangın Kaçış Merdiveni Sınırı:',
+          desc: 'MEVCUT ÇIKIŞ YETERLİ OLABİLİR: Metraj ve kat itibariyle tek çıkış kurtarıyor gibi görünse de detaylı plan incelemesi şarttır.'
+        });
+      }
+
+      // 2. Sprinkler (Yağmurlama) Sistemi
+      let sprinklerZorunlu = false;
+      if (['hastane', 'anaokulu'].includes(type)) sprinklerZorunlu = true;
+      if (['otel', 'yurt', 'okul'].includes(type) && (floors > 2 || area > 2000)) sprinklerZorunlu = true;
+      if (['fabrika', 'depo'].includes(type) && area > 2000) sprinklerZorunlu = true;
+      if (type === 'otopark' && area > 600) sprinklerZorunlu = true;
+
+      if (sprinklerZorunlu) {
+        results.push({
+          status: 'fail',
+          title: 'Otomatik Sprinkler (Yağmurlama):',
+          desc: 'ZORUNLU (Madde 96): Yapı türü ve boyutu gereği tüm kapalı alanlarda otomatik sulu söndürme sistemi tesis edilmelidir.'
+        });
+        isHighRisk = true;
+      } else {
+        results.push({
+          status: 'pass',
+          title: 'Otomatik Sprinkler (Yağmurlama):',
+          desc: 'STANDART DOLAP: Sprinkler zorunlu görünmüyor ancak tazyikli yangın dolap tesisatı kurulmalıdır.'
+        });
+      }
+
+      // 3. Yangın Algılama ve Tahliye
+      if (['hastane', 'otel', 'yurt', 'anaokulu', 'okul'].includes(type) || area > 1000) {
+        results.push({
+          status: 'fail',
+          title: 'Adresli Yangın Algılama Sistemi:',
+          desc: 'ZORUNLU (Madde 75): Erken uyarı için tüm odalarda/bölümlerde duman ve ısı dedektörleri ile ihbar sistemi kurulmalıdır.'
+        });
+      } else {
+        results.push({
+          status: 'pass',
+          title: 'Mekanik Duman Tahliye Havalandırması:',
+          desc: 'DOĞAL HAVALANDIRMA: Sınır değerlerin altındasınız, pencereler ve havalandırma kapakları yeterli olabilir.'
+        });
+      }
+
+      // Sonuçları Ekrana Basma
+      container.innerHTML = '';
+      results.forEach(r => {
+        const icon = r.status === 'fail' 
+          ? `<span class="text-pink-500 font-black text-xl leading-none">✕</span>` 
+          : `<span class="text-emerald-400 font-black text-xl leading-none">✓</span>`;
+        
+        container.innerHTML += `
+          <div class="bg-slate-800/40 rounded-xl p-4 border border-slate-700/50 flex gap-4 items-start">
+            <div class="pt-0.5">${icon}</div>
+            <div>
+              <h4 class="font-bold text-white text-sm">${r.title}</h4>
+              <p class="text-slate-400 text-xs mt-1 leading-relaxed">${r.desc}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      // Tehlike Sınıfı ve Barem Güncelleme
+      if (isHighRisk || ['hastane', 'otel', 'yurt', 'okul', 'anaokulu'].includes(type)) {
+        badge.className = "bg-red-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full";
+        badge.innerText = "YÜKSEK TEHLİKE SINIFI";
+        projectType.innerText = "Kapsamlı Mühendislik Projesi";
+        projectType.className = "text-red-400 font-bold text-lg";
+      } else {
+        badge.className = "bg-emerald-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full";
+        badge.innerText = "STANDART TEHLİKE";
+        projectType.innerText = "Standart Tadilat Projesi";
+        projectType.className = "text-yellow-400 font-bold text-lg";
+      }
+    });
+
+    // Sayfa açıldığında varsayılan değerlerle 1 kez çalıştır
+    setTimeout(() => btn.click(), 100);
+  }
+</script>
