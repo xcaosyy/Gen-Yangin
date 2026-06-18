@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", description = "Fabrika ve Oteller İçin Mevzuata Uygun Yangın Danışmanlığı & Anahtar Teslim Yapısal Çözümler" } = Astro.props;
+
+// Mevcut sayfa yolunu bulup aktif linki yakalamak için
+const currentPath = Astro.url.pathname;
 ---
 
 <html lang="tr" class="scroll-smooth">
@@ -11,28 +14,69 @@ const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", descrip
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     
-    <!-- Türkçe Karakter Destekli Güvenli Font Ailesi -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style is:global>
+      /* --- YANGIN EFEKTİ SİHRİ --- */
+      .fire-link {
+        position: relative;
+        color: #1e293b;
+        transition: all 0.3s ease;
+      }
+      
+      /* Aktif sayfa veya hover durumunda yanan kağıt/köz efekti */
+      .fire-link.active, .fire-link:hover {
+        color: #dc2626 !important;
+        text-shadow: 0 0 10px rgba(220, 38, 38, 0.8), 0 0 20px rgba(249, 115, 22, 0.6), 0 0 30px rgba(253, 224, 71, 0.4);
+        animation: burnWobble 0.5s ease-in-out infinite alternate;
+      }
+
+      /* Yanan kağıdın altındaki kor çizgisi */
+      .fire-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #df2020, #f97316, #fde047);
+        box-shadow: 0 2px 8px rgba(220, 38, 38, 0.9);
+        transition: width 0.4s ease;
+      }
+
+      .fire-link.active::after, .fire-link:hover::after {
+        width: 100%;
+      }
+
+      @keyframes burnWobble {
+        0% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1.03) rotate(0.5deg); filter: brightness(1.2); }
+      }
+
+      /* Hamburger Butonunun Yangın Hali */
+      #menu-btn.open .line-1 { transform: rotate(45deg) translate(6px, 6px); background-color: #dc2626; }
+      #menu-btn.open .line-2 { opacity: 0; }
+      #menu-btn.open .line-3 { transform: rotate(-45deg) translate(6px, -6px); background-color: #dc2626; }
+    </style>
   </head>
   <body class="bg-slate-50 text-slate-800 font-['Plus_Jakarta_Sans',sans-serif] antialiased min-h-screen flex flex-col justify-between pt-20">
 
-    <!-- SABİT KURUMSAL ÜST MENÜ -->
     <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-slate-200/80 z-50">
-      <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/" class="group flex flex-col">
-          <span class="text-2xl font-extrabold text-slate-900 tracking-tight">GEN <span class="text-red-600">YANGIN</span></span>
-          <span class="text-[9px] text-slate-500 font-bold tracking-widest uppercase mt-0.5">DANIŞMANLIK & YAPI ÇÖZÜMLERİ</span>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+        
+        <a href="/" class="group flex flex-col z-50">
+          <span class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">GEN <span class="text-red-600">YANGIN</span></span>
+          <span class="text-[8px] sm:text-[9px] text-slate-500 font-bold tracking-widest uppercase mt-0.5">DANIŞMANLIK & YAPI ÇÖZÜMLERİ</span>
         </a>
         
         <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
-          <a href="/" class="hover:text-red-600 transition">Anasayfa</a>
-          <a href="/hakkimizda" class="hover:text-red-600 transition">Hakkımızda</a>
-          <a href="/hizmetler" class="hover:text-red-600 transition">Hizmetler</a>
-          <a href="/yonetmelik" class="hover:text-red-600 transition">Yönetmelik</a>
+          <a href="/" class={`fire-link ${currentPath === '/' ? 'active' : ''}`}>Anasayfa</a>
+          <a href="/hakkimizda" class={`fire-link ${currentPath === '/hakkimizda' ? 'active' : ''}`}>Hakkımızda</a>
+          <a href="/hizmetler" class={`fire-link ${currentPath === '/hizmetler' ? 'active' : ''}`}>Hizmetler</a>
+          <a href="/yonetmelik" class={`fire-link ${currentPath === '/yonetmelik' ? 'active' : ''}`}>Yönetmelik</a>
           
-          <!-- MEVZUAT & BİLGİ MERKEZİ DROPDOWN ALANI -->
           <div class="relative group py-6">
             <a href="#" class="hover:text-red-600 transition flex items-center gap-1">
               Mevzuat & Bilgi <span class="text-[10px]">▼</span>
@@ -43,26 +87,45 @@ const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", descrip
             </div>
           </div>
 
-          <a href="/iletisim" class="hover:text-red-600 transition">İletişim</a>
+          <a href="/iletisim" class={`fire-link ${currentPath === '/iletisim' ? 'active' : ''}`}>İletişim</a>
         </nav>
 
-        <div class="flex items-center gap-3">
-          <a href="tel:+905336626210" class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-4 py-2.5 rounded-xl transition text-sm flex items-center gap-2 font-bold">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="tel:+905336626210" class="hidden sm:flex bg-slate-100 hover:bg-slate-200 text-slate-900 px-4 py-2.5 rounded-xl transition text-sm items-center gap-2 font-bold">
             📞 0 533 662 62 10
           </a>
-          <a href="https://wa.me/905336626210" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
-            💬 Ücretsiz Ön Keşif
+          <a href="https://wa.me/905336626210" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 sm:gap-2 transition shadow-sm z-50">
+            💬 <span class="hidden xs:inline">Ücretsiz</span> Ön Keşif
           </a>
+
+          <button id="menu-btn" class="flex flex-col justify-between w-6 h-5 md:hidden z-50 focus:outline-none" aria-label="Menü">
+            <span class="line-1 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
+            <span class="line-2 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
+            <span class="line-3 w-full h-0.5 bg-slate-900 rounded transition-all duration-300"></span>
+          </button>
         </div>
+      </div>
+
+      <div id="mobile-menu" class="fixed inset-0 bg-white/98 z-40 flex flex-col justify-center items-center transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none md:hidden">
+        <nav class="flex flex-col items-center gap-6 text-xl font-extrabold tracking-wide">
+          <a href="/" class={`fire-link text-2xl ${currentPath === '/' ? 'active' : ''}`}>Anasayfa</a>
+          <a href="/hakkimizda" class={`fire-link text-2xl ${currentPath === '/hakkimizda' ? 'active' : ''}`}>Hakkımızda</a>
+          <a href="/hizmetler" class={`fire-link text-2xl ${currentPath === '/hizmetler' ? 'active' : ''}`}>Hizmetler</a>
+          <a href="/yonetmelik" class={`fire-link text-2xl ${currentPath === '/yonetmelik' ? 'active' : ''}`}>Yönetmelik</a>
+          <a href="/yangin-mevzuati-revizyonlari" class={`fire-link text-lg text-slate-500 ${currentPath === '/yangin-mevzuati-revizyonlari' ? 'active' : ''}`}>📊 Mevzuat Revizyonları</a>
+          <a href="/yangin-sozlugu" class={`fire-link text-lg text-slate-500 ${currentPath === '/yangin-sozlugu' ? 'active' : ''}`}>📖 Yangın Sözlüğü</a>
+          <a href="/iletisim" class={`fire-link text-2xl ${currentPath === '/iletisim' ? 'active' : ''}`}>İletişim</a>
+          
+          <div class="w-24 h-px bg-gradient-to-r browser-default from-transparent via-red-600 to-transparent my-4"></div>
+          <a href="tel:+905336626210" class="text-sm font-bold text-slate-600">📞 0 533 662 62 10</a>
+        </nav>
       </div>
     </header>
 
-    <!-- SAYFA İÇERİKLERİ -->
     <main class="flex-grow">
       <slot />
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t-4 border-red-600">
       <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         <div>
@@ -94,5 +157,27 @@ const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", descrip
       </div>
     </footer>
 
+    <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          menuBtn.classList.toggle('open');
+          
+          if (mobileMenu.classList.contains('translate-x-full')) {
+            // Menüyü Aç
+            mobileMenu.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            mobileMenu.classList.add('translate-x-0', 'opacity-100', 'pointer-events-on');
+            document.body.style.overflow = 'hidden'; // Arka plan kaymasın
+          } else {
+            // Menüyü Kapat
+            mobileMenu.classList.remove('translate-x-0', 'opacity-100', 'pointer-events-on');
+            mobileMenu.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    </script>
   </body>
 </html>
