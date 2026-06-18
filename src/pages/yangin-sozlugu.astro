@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  pageTitle="A'dan Z'ye Yangın Güvenliği ve Mevzuat Terimleri Sözlüğü | Gen Yangın"
+  description="Sprinkler, zonlama, rıht, panik bar gibi teknik yangın yönetmeliği terimlerinin resmi, anlaşılır açıklamaları ve akademik sözlük kılavuzu."
+>
+  
+  <!-- BAŞLIK BANNER -->
+  <section class="bg-white border-b border-slate-200 py-12">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="text-xs font-bold bg-red-50 text-red-600 px-3 py-1.5 rounded-full uppercase tracking-wider">TEKNİK BİLGİ VERİ TABANI</span>
+      <h1 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mt-4 mb-3">Yangın Terimleri Sözlüğü</h1>
+      <p class="text-slate-600 max-w-xl mx-auto text-xs md:text-sm">Yönetmelik ve denetim süreçlerinde karşılaştığınız tüm teknik terimlerin resmi ve pratik karşılıkları.</p>
+    </div>
+  </section>
+
+  <!-- SÖZLÜK GÖVDESİ -->
+  <section class="py-12 max-w-4xl mx-auto px-6">
+    
+    <!-- HARF FİLTRELEME BARBARI -->
+    <div class="flex flex-wrap gap-1.5 justify-center mb-10 p-3 bg-white border border-slate-200 rounded-2xl shadow-sm" id="alphabet-filter">
+      <button class="letter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white default-all" data-letter="all">Tümü</button>
+      {['B', 'D', 'E', 'H', 'P', 'R', 'S', 'Y', 'Z'].map(letter => (
+        <button class="letter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-50 text-slate-700 hover:bg-red-50 hover:text-red-600 transition" data-letter={letter}>
+          {letter}
+        </button>
+      ))}
+    </div>
+
+    <!-- TERİM KARTLARI LİSTESİ -->
+    <div class="space-y-4" id="terms-list">
+      
+      <!-- B -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="B">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">B</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Basınçlandırma Sistemi</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Yangın anında kaçış merdiven yuvalarına veya asansör kuyularına mekanik fanlar yardımıyla yüksek basınçlı hava üfleyerek, dumanın bu güvenli bölgelere sızmasını yasal olarak engelleyen sistemdir.
+        </p>
+      </div>
+
+      <!-- D -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="D">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">D</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Duman Bariyeri</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Tavan seviyesinde biriken zehirli gaz ve dumanın yatayda yayılmasını önlemek amacıyla mimari olarak tavana monte edilen, yönetmeliğe uygun yangın dayanımlı paneller veya perdelerdir.
+        </p>
+      </div>
+
+      <!-- E -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="E">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">E</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">EN 1634-1 Standartı</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Yangın kapılarının ve bölme elemanlarının yangına karşı dayanıklılık, duman sızdırmazlık ve yalıtım sürelerini belirleyen, itfaiye denetimlerinde sertifikası kesinlikle aranan resmi Avrupa normudur.
+        </p>
+      </div>
+
+      <!-- H -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="H">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">H</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Hidrant Sistemi</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Yangın anında itfaiye araçlarının dışarıdan kesintisiz ve tazyikli su alabilmesi amacıyla bina çevrelerine hat boyunca yerleştirilen resmi, kırmızı renkli yer üstü su alma istasyonlarıdır.
+        </p>
+      </div>
+
+      <!-- P -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="P">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">P</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Panik Bar</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Acil çıkış ve yangın kapılarının üzerine yatay olarak monte edilen, izdiham anında insanların sadece vücut ağırlığıyla yaslandığında kapının dışarıya doğru anında açılmasını sağlayan mekanik kilit mekanizmasıdır.
+        </p>
+      </div>
+
+      <!-- R -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="R">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">R</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Rıht Yüksekliği</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Yangın merdivenlerinde basamakların dikey yükseklik ölçüsüdür. Yönetmeliğe göre acil çıkış merdivenlerinde rıht yüksekliği güvenli tahliye açısı için 18 santimetreden fazla olamaz.
+        </p>
+      </div>
+
+      <!-- S -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="S">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">S</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Sprinkler (Yağmurlama)</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Tavan hatlarına döşenen boru şebekelerine bağlı, yangın kaynaklı belirli bir sıcaklık eşiğine (örn: 68°C) ulaşıldığında otomatik patlayarak alevlerin üzerine su püskürten mekanik söndürme başlığıdır.
+        </p>
+      </div>
+
+      <!-- Y -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="Y">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">Y</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Yangın Kompartımanı</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Bina içinde, yangının ve dumanın belirli bir süre (örn: 60-120 dakika) boyunca diğer bölümlere sıçramasını önleyecek şekilde yangına dayanıklı duvar ve kapılarla izole edilmiş hacimsel alanlardır.
+        </p>
+      </div>
+
+      <!-- Z -->
+      <div class="term-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" data-alpha="Z">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-2xl font-black text-red-600">Z</span>
+          <h3 class="text-base md:text-lg font-extrabold text-slate-950">Zonlama (Bölümleme)</h3>
+        </div>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          Büyük endüstriyel tesislerin veya otellerin hem algılama hem de söndürme hatlarının kontrol edilebilir küçük alt bölgelere ayrılarak projelendirilmesi mimari işlemidir.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ALT İLETİŞİM ALANI -->
+    <div class="mt-12 p-6 bg-slate-900 text-white rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left shadow-xl">
+      <div>
+        <h4 class="font-bold text-sm md:text-base text-slate-100">Projenizdeki teknik terimler ve yasal zorunluluklar kafanızı mı karıştı?</h4>
+        <p class="text-slate-400 text-xs mt-0.5">Bırakın karmaşık yönetmelik hesaplarını sizin yerinize biz anlaşılır kılalım.</p>
+      </div>
+      <a href="https://wa.me/905336626210" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3 rounded-xl text-center text-xs transition shadow-sm whitespace-nowrap">
+        Gen Yangın | Yangın Danışmanı ile İletişime Geçin 💬
+      </a>
+    </div>
+
+  </section>
+
+  <!-- JAVASCRIPT MOTORU: HARF FİLTRELEME SİSTEMİ -->
+  <script>
+    const buttons = document.querySelectorAll('.letter-btn');
+    const cards = document.querySelectorAll('.term-card');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const letter = btn.getAttribute('data-letter');
+
+        // Buton renklerini güncelle
+        buttons.forEach(b => {
+          b.classList.remove('bg-slate-900', 'text-white');
+          b.classList.add('bg-slate-50', 'text-slate-700');
+        });
+        btn.classList.remove('bg-slate-50', 'text-slate-700');
+        btn.classList.add('bg-slate-900', 'text-white');
+
+        // Kartları harfe göre filtrele
+        cards.forEach(card => {
+          const cardAlpha = card.getAttribute('data-alpha');
+          if (letter === 'all' || cardAlpha === letter) {
+            (card as HTMLDivElement).style.display = 'block';
+          } else {
+            (card as HTMLDivElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</Layout>
