@@ -1,221 +1,165 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Yönetmelik Maddeleri Verisi
+const maddeler = [
+  { id: "1", baslik: "1. Genel Hükümler ve Tehlike Sınıfları" },
+  { id: "2", baslik: "2. Binalara İlişkin Genel Hükümler" },
+  { id: "3", baslik: "3. Kaçış Yolları ve Merdivenleri" },
+  { id: "4", baslik: "4. Bina Bölümleri ve Tesisleri" },
+  { id: "5", baslik: "5. Elektrik Tesisatı ve Sistemleri" },
+  { id: "6", baslik: "6. Duman Kontrol Sistemleri" },
+  { id: "7", baslik: "7. Söndürme Sistemleri" },
+  { id: "8", baslik: "8. Tehlikeli Maddelerin Depolanması" },
+  { id: "9", baslik: "9. Eğitim, Ekipler ve Denetim" },
+  { id: "10", baslik: "10. Mevcut Binalar Hakkında Hükümler" },
+  { id: "11", baslik: "11. Tarihi Yapılar (Özel Madde)" },
+  { id: "12", baslik: "12. Son Hükümler" }
+];
 ---
 
-<Layout 
-  pageTitle="Türkiye Yangın Yönetmeliği Maddeleri & Kılavuzu | Gen Yangın"
-  description="Binaların Yangından Korunması Hakkında Yönetmelik maddelerinin güncel, detaylı açıklamaları, tarihi yapılar özel maddesi (Madde 167/C) ve resmi kılavuz dökümanı."
->
-  
-  <section class="bg-white border-b border-slate-200/60 py-12">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <span class="text-xs font-bold bg-red-50 text-red-600 px-3 py-1.5 rounded-full uppercase tracking-wider">İnteraktif Yangın Kılavuzu</span>
-      <h1 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mt-4 mb-3">T.C. Resmi Yangın Yönetmeliği</h1>
-      <p class="text-slate-600 max-w-2xl mx-auto text-xs md:text-sm">Binaların Yangından Korunması Hakkında Yönetmelik maddelerini aşağıdan başlık başlık inceleyebilir, resmi dökümanı tam ekran okuyabilirsiniz.</p>
+<Layout title="T.C. Resmi Yangın Yönetmeliği | Gen Yangın">
+  <main class="bg-slate-50 min-h-screen pt-24 pb-16 relative">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
+      <span class="bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-red-100">
+        İNTERAKTİF YANGIN KILAVUZU
+      </span>
+      <h1 class="text-3xl md:text-5xl font-black text-slate-900 mt-4 tracking-tight">
+        T.C. Resmi Yangın Yönetmeliği
+      </h1>
+      <p class="text-slate-500 text-sm md:text-base mt-2 max-w-2xl mx-auto">
+        Binaların Yangından Korunması Hakkında Yönetmelik maddelerini aşağıdan inceleyebilirsiniz.
+      </p>
     </div>
-  </section>
 
-  <section class="py-12 max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <div class="lg:col-span-4 sticky top-24 bg-white rounded-2xl border border-slate-200 p-4 shadow-md space-y-1 max-h-[calc(100vh-140px)] overflow-y-auto">
-        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-3">Yönetmelik Kısımları</h3>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <a href="#genel-hukumler" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          1. Genel Hükümler ve Tehlike Sınıfları
-        </a>
-        <a href="#genel-guvenlik" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          2. Binalara İlişkin Genel Hükümler
-        </a>
-        <a href="#kacis-yollari" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          3. Kaçış Yolları ve Merdivenleri
-        </a>
-        <a href="#bina-bolumleri" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          4. Bina Bölümleri ve Tesisleri
-        </a>
-        <a href="#elektrik-tesisati" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          5. Elektrik Tesisatı ve Sistemleri
-        </a>
-        <a href="#duman-kontrol" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          6. Duman Kontrol Sistemleri
-        </a>
-        <a href="#yangin-sondurme" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          7. Söndürme Sistemleri
-        </a>
-        <a href="#tehlikeli-maddeler" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          8. Tehlikeli Maddelerin Depolanması
-        </a>
-        <a href="#egitim-ekipler" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          9. Eğitim, Ekipler ve Denetim
-        </a>
-        <a href="#mevcut-binalar" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          10. Mevcut Binalar Hakkında Hükümler
-        </a>
-        <a href="#tarihi-yapilar" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-red-600 bg-red-50/50 hover:bg-red-50 hover:text-red-700 transition border-l-2 border-red-600">
-          11. Tarihi Yapılar (Özel Madde)
-        </a>
-        <a href="#son-hukumler" class="sidebar-link block px-3 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-red-600 transition border-l-2 border-transparent">
-          12. Son Hükümler
-        </a>
-
-        <div class="pt-4 border-t border-slate-100">
-          <a href="/yangin_yonetmeligi_kilavuzu.pdf" download class="block w-full bg-slate-900 hover:bg-slate-800 text-white text-center font-bold p-3 rounded-xl text-[11px] leading-normal transition">
-            📄 Binaların Yangından Korunması Hakkında Yönetmelik Kılavuzu ( YANGIN YÖNETMELİĞİ ) indir (pdf)
-          </a>
-        </div>
-      </div>
-
-      <div class="lg:col-span-8 space-y-12 scroll-mt-24">
-        
-        <div id="genel-hukumler" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">BİRİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Genel Hükümler, Binaların Kullanım ve Tehlike Sınıfları</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Yönetmeliğin bu kısmı, tüm yapıların kullanım amaçlarına göre (konut, konaklama, sağlık, endüstriyel vb.) sınıflandırılmasını ve binalardaki yangın yüküne bağlı olarak düşük, orta ve yüksek tehlike sınıflarını belirler. Ruhsatlandırma ve projelendirme aşamasındaki tüm söndürme sistemleri bu temel sınıflandırmaya göre şekillenir.
-          </p>
-        </div>
-
-        <div id="genel-guvenlik" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">İKİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Binalara İlişkin Genel Yangın Güvenliği Hükümleri</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Yapı malzemelerinin yangın karşısındaki davranışları, yangın kompartımanları (zonlama), binalar arası güvenli yangın mesafeleri ve taşıyıcı çelik sistemlerin yangına dayanıklılık süreleri bu kısımda düzenlenmiştir. Yapısal tadilatlarda kompartıman sınırlarına dikkat edilmesi esastır.
-          </p>
-        </div>
-
-        <div id="kacis-yollari" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">ÜÇÜNCÜ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Kaçış Yolları, Kaçış Merdivenleri ve Özel Durumlar</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Acil durumlarda binaların güvenli tahliyesi için gereken kaçış mesafeleri, koridor net temiz genişlikleri, yangın merdivenlerinin rıht ve basamak ölçüleri ile acil çıkış kapılarının yönleri ve panik barların standartları bu kısımda milimetrik kurallara bağlanmıştır.
-          </p>
-        </div>
-
-        <div id="bina-bolumleri" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">DÖRDÜNCÜ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Bina Bölümlerine ve Tesislerine İlişkin Düzenlemeler</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Kazan daireleri, yakıt depoları, sığınaklar, mutfaklar, asansör şaftları ve havalandırma tesisatlarının yangın güvenliği standartları bu bölümde detaylandırılmıştır. Özellikle yüksek riskli mutfak bacalarındaki otomatik söndürme zorunlu kılınmıştır.
-          </p>
-        </div>
-
-        <div id="elektrik-tesisati" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">BEŞİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Elektrik Tesisatı ve Sistemleri</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Acil durum aydınlatma armatürlerinin yerleşimi, yönlendirme (acil çıkış) levhaları, jeneratör odalarının yalıtımı ve yangın anında çalışmaya devam etmesi gereken elektrik hatlarının yangına dayanıklı kablolarla döşenmesi standartlarını içerir.
-          </p>
-        </div>
-
-        <div id="duman-kontrol" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">ALTINCI KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Duman Kontrol Sistemleri</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Yangın anında zehirlenmeleri önlemek amacıyla duman tahliye fanları, jet fanlar, doğal duman havalandırma kapakları ve kaçış merdiveni basınçlandırma sistemlerinin tasarım ve hava değişim hızı kapasite hesapları bu bölümde yer alır.
-          </p>
-        </div>
-
-        <div id="yangin-sondurme" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">YEDİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Yangın Söndürme Sistemleri</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Sprinkler (yağmurlama) söndürme tesisatları, yangın dolapları, dış hidrant sistemleri, yangın suyu depoları ve pompalama istasyonlarının hangi metrekare ve yükseklik sınırlarında zorunlu olduğu bu bölümde yasal tablolara bağlanmıştır.
-          </p>
-        </div>
-
-        <div id="tehlikeli-maddeler" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">SEKİZİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Tehlikeli Maddelerin Depolanması ve Kullanılması</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            LPG, doğalgaz tesisatları, parlayıcı, patlayıcı ve kolay alev alıcı kimyasal maddelerin depolandığı antrepoların, sanayi tüplerinin ve akaryakıt tanklarının yerleşim planlamaları ile asgari emniyet mesafelerini düzenleyen kritik bölümdür.
-          </p>
-        </div>
-
-        <div id="egitim-ekipler" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">DOKUZUNCU KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Yangın Güvenliği Sorumluluğu, Ekipler, Eğitim ve Denetim</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            İşletmelerde kurulması yasal zorunluluk olan acil durum mücadele ekiplerinin (söndürme, kurtarma, ilk yardım) yapısı, yıllık yapılması gereken yangın tahliye tatbikatları ve personelin alması gereken resmi yangın eğitimlerinin belgelendirme süreçlerini düzenler.
-          </p>
-        </div>
-
-        <div id="mevcut-binalar" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">ONUNCU KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Mevcut Binalar Hakkında Uygulanacak Hükümler</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Yönetmeliğin yürürlüğe girdiği tarihten önce inşa edilmiş mevcut yapılarda, kullanım değişikliği veya büyük restorasyon tadilatları yapılmadığı sürece tanınan asgari muafiyet sınırlarını ve yapılması kaçınılmaz olan temel güvenlik önlemlerini tanımlar.
-          </p>
-        </div>
-
-        <div id="tarihi-yapilar" class="bg-red-50/50 p-8 rounded-3xl border-2 border-red-200 shadow-md scroll-mt-24 relative overflow-hidden group">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full translate-x-8 -translate-y-8"></div>
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">ON BİRİNCİ KISIM (ÖZEL HÜKÜMLER)</span>
-          <h2 class="text-xl font-extrabold text-red-950 mb-4 flex items-center gap-2">🏛️ Tarihi Yapılar ve Koruma Esasları</h2>
-          
-          <div class="space-y-4 text-xs md:text-sm text-slate-800 leading-relaxed">
-            <p class="font-extrabold text-red-900">MADDE 167/C - Uygulama Standartları:</p>
-            <p>
-              (1) Bu Kısımda aksi belirtilmedikçe, tarihi yapıların yangından korunması hakkında, bu Yönetmeliğin Onuncu Kısım hükümleri uygulanır. Tarihi değeri olan tescilli kültür ve tabiat varlığı yapılarda özgün mimari dokunun korunması esastır.
-            </p>
-            <p>
-              (2) Taşıyıcı kolonları ve ana kirişleri ahşap olan tarihi binaların zemin katı haricindeki katları; yataklı sağlık hizmeti, huzurevi, bakımevi, anaokulu, ilköğretim okulu ve öğrenci yurdu olarak kesinlikle kullanılamaz.
-            </p>
-            <p>
-              (3) Tarihi yapı dahilinde yapılacak tadilat veya tamiratlarda, yapının aslına sadık kalmak maksadıyla yapının inşasında kullanılmış olan malzemelerin aynısı veya benzeri kullanılabilir. Yangın tahliye projeleri ile algılama ve söndürme tesisatı projeleri ilgili teknik müşavir firma tarafından, fiziki ve görsel bakımdan özelliğine uygun olarak, yapıya zarar vermeyecek şekilde hazırlanır.
-            </p>
-            <p>
-              (4) Bir kattan fazla katı olan topluma açık tarihi yapılarda, taşıyıcı kolonların ahşap olması durumunda ana taşıyıcıların restorasyon sırasında yangına en az 90 dakika dayanıklı olacak şekilde yalıtılması gerekir.
-            </p>
-            <div class="p-4 bg-white rounded-2xl border border-red-200 text-xs text-red-950 mt-4 font-medium">
-              ⚠️ <strong>DANIŞMANLIK NOTU:</strong> Tarihi yapıların restorasyon ve ruhsatlandırma süreçleri standart yapılardan tamamen farklı kurul kurallarına tabidir. Dokunun aslı bozulmadan itfaiye onayı almak üst düzey uzmanlık gerektirir. Biz tarihi miraslarımızı koruyarak yasal izinlerinizi alıyoruz.
-            </div>
+        <aside class="hidden lg:block lg:col-span-4 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm sticky top-28">
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider mb-4 px-2">YÖNETMELİK KISIMLARI</h3>
+          <nav class="space-y-1">
+            {maddeler.map(m => (
+              <a href={`#bolum-${m.id}`} class="block text-slate-600 hover:text-red-600 hover:bg-red-50/50 px-3 py-2.5 rounded-xl text-sm font-semibold transition">
+                {m.baslik}
+              </a>
+            ))}
+          </nav>
+          <div class="mt-6 pt-6 border-t border-slate-100">
+            <a href="/yangin_yonetmeligi_kilavuzu.pdf" download class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl text-xs transition">
+              📄 Tüm Yönetmeliği İndir (PDF)
+            </a>
           </div>
-        </div>
+        </aside>
 
-        <div id="son-hukumler" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm scroll-mt-24">
-          <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-1">ON İKİNCİ KISIM</span>
-          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Son Hükümler</h2>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-            Yönetmeliğin yürürlüğe giriş tarihi, yürütme yetkisine sahip kurumlar (Bakanlar Kurulu ve ilgili bakanlıklar) ve imalat denetimlerinden sorumlu yetkililerin yasal sınırları bu son kısımda belirtilmiştir.
-          </p>
-        </div>
+        <section class="lg:col-span-8 space-y-12">
+          {maddeler.map(m => (
+            <div id={`#bolum-${m.id}`} class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm scroll-mt-28">
+              <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 border-b border-slate-100 pb-4 mb-4 tracking-tight">
+                {m.baslik}
+              </h2>
+              <div class="text-slate-600 text-sm md:text-base leading-relaxed space-y-4">
+                <p>Bu bölüm, ilgili yangın mevzuatına ait yasal sınırlamaları, uygulama standartlarını ve yapısal zorunlulukları içerir. İşletmenizin bu maddelere uygunluğu resmi itfaiye denetimlerinin en kritik aşamasıdır.</p>
+                {m.id === "11" && (
+                  <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200/70 text-slate-800 text-sm mt-4">
+                    <strong class="text-amber-800 flex items-center gap-1 mb-2">⚠️ DANIŞMANLIK NOTU:</strong>
+                    Tarihi yapıların restorasyon ve ruhsatlandırma süreçleri standart yapılardan tamamen farklı kurul kurallarına tabidir. Dokunun aslı bozulmadan itfaiye onayı almak üst düzey uzmanlık gerektirir. Bizimle iletişime geçerek yasal izinlerinizi sorunsuz yönetebilirsiniz.
+                  </div>
+                )}
+                <p class="text-xs text-slate-400 font-medium">Detaylı teknik analiz ve hesaplamalar için ilgili alt başlıkları kurumsal danışmanımız eşliğinde inceleyebilirsiniz.</p>
+              </div>
+            </div>
+          ))}
+        </section>
 
       </div>
     </div>
-  </section>
 
-  <script>
-    const links = document.querySelectorAll('.sidebar-link') as NodeListOf<HTMLAnchorElement>;
+    <button id="mobil-menu-tetikleyici" class="lg:hidden fixed bottom-6 right-6 z-50 bg-red-600 hover:bg-red-700 text-white font-bold p-4 rounded-full shadow-2xl flex items-center gap-2 border border-red-500 animate-bounce">
+      <span>📖</span> <span class="text-sm pr-1">Yönetmelik Menüsü</span>
+    </button>
 
-    function changeActiveLink() {
-      let index = 0;
-      const scrollPosition = window.scrollY + 150;
+    <div id="mobil-menu-arka-plan" class="lg:hidden fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
 
-      const sections = [
-        'genel-hukumler', 'genel-guvenlik', 'kacis-yollari', 'bina-bolumleri',
-        'elektrik-tesisati', 'duman-kontrol', 'yangin-sondurme', 'tehlikeli-maddeler',
-        'egitim-ekipler', 'mevcut-binalar', 'tarihi-yapilar', 'son-hukumler'
-      ];
+    <div id="mobil-menu-paneli" class="lg:hidden fixed bottom-0 left-0 right-0 bg-white rounded-t-[2.5rem] shadow-2xl z-50 max-h-[75vh] overflow-y-auto transform translate-y-full transition-transform duration-300 ease-out border-t border-slate-200">
+      <div class="p-6">
+        <div class="w-12 h-1.5 bg-slate-200 mx-auto rounded-full mb-6"></div>
+        
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Yönetmelik Kısımları</h3>
+          <button id="mobil-menu-kapat" class="text-slate-400 hover:text-slate-600 text-xl font-bold bg-slate-100 w-8 h-8 rounded-full flex items-center justify-center">✕</button>
+        </div>
 
-      for (let i = 0; i < sections.length; i++) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPosition) {
-          index = i;
-        }
-      }
+        <nav class="space-y-1.5 mb-6">
+          {maddeler.map(m => (
+            <button data-hedef={`#bolum-${m.id}`} class="mobil-nav-link w-full text-left text-slate-700 hover:text-red-600 hover:bg-red-50/60 px-4 py-3 rounded-xl text-sm font-bold transition border border-transparent hover:border-red-100 flex items-center justify-between">
+              <span>{m.baslik}</span>
+              <span class="text-slate-300 text-xs">➔</span>
+            </button>
+          ))}
+        </nav>
 
-      links.forEach((link, i) => {
-        if (i === index) {
-          link.classList.add('text-red-600', 'bg-red-50/50', 'border-red-600');
-          link.classList.remove('text-slate-700', 'border-transparent');
-        } else {
-          link.classList.remove('text-red-600', 'bg-red-50/50', 'border-red-600');
-          link.classList.add('text-slate-700', 'border-transparent');
-        }
-      });
-    }
+        <a href="/yangin_yonetmeligi_kilavuzu.pdf" download class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-2xl text-sm transition text-center shadow-md">
+          📄 Tüm Yönetmeliği İndir (PDF)
+        </a>
+      </div>
+    </div>
 
-    window.addEventListener('scroll', changeActiveLink);
-    window.addEventListener('load', changeActiveLink);
-  </script>
+  </main>
 </Layout>
+
+<script>
+  // Mobil Menü DOM Elemanları
+  const buton = document.getElementById('mobil-menu-tetikleyici');
+  const panel = document.getElementById('mobil-menu-paneli');
+  const arkaPlan = document.getElementById('mobil-menu-arka-plan');
+  const kapat = document.getElementById('mobil-menu-kapat');
+  const linkler = document.querySelectorAll('.mobil-nav-link');
+
+  // Menüyü Açma Fonksiyonu
+  function menuyuAc() {
+    if (panel && arkaPlan) {
+      arkaPlan.classList.remove('hidden');
+      setTimeout(() => {
+        arkaPlan.classList.add('opacity-100');
+        panel.classList.remove('translate-y-full');
+      }, 10);
+      document.body.style.overflow = 'hidden'; // Arka plan kaymasını engelle
+    }
+  }
+
+  // Menüyü Kapatma Fonksiyonu
+  function menuyuKapat() {
+    if (panel && arkaPlan) {
+      panel.classList.add('translate-y-full');
+      arkaPlan.classList.remove('opacity-100');
+      setTimeout(() => {
+        arkaPlan.classList.add('hidden');
+      }, 300);
+      document.body.style.overflow = ''; // Kaymayı geri aç
+    }
+  }
+
+  // Dinleyicileri Ekle
+  if (buton) buton.addEventListener('click', menuyuAc);
+  if (kapat) kapat.addEventListener('click', menuyuKapat);
+  if (arkaPlan) arkaPlan.addEventListener('click', menuyuKapat);
+
+  // Linklere Tıklanınca İlgili Alana Kay kaydır ve Menüyü Kapat
+  linkler.forEach(link => {
+    link.addEventListener('click', () => {
+      const hedefId = link.getAttribute('data-hedef');
+      if (hedefId) {
+        menuyuKapat();
+        
+        // Elemanı bul ve pürüzsüzce kaydır
+        setTimeout(() => {
+          const eleman = document.getElementById(hedefId);
+          if (eleman) {
+            eleman.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 350); // Menü kapanma animasyonu (300ms) bittikten hemen sonra kaydır
+      }
+    });
+  });
+</script>
