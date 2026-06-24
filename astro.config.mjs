@@ -1,9 +1,12 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://genyangin.com', // 👈 Google'ın haritayı okuyabilmesi için bu satır şart!
-  integrations: [tailwind(), sitemap()],
+  site: 'https://genyangin.com', // 👈 Haritanın oluşması için bu satırın tam olarak böyle olması ŞART!
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  integrations: [sitemap()],
 });
