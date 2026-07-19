@@ -1,6 +1,76 @@
 ---
 import '../styles/global.css';
-const { pageTitle = "Gen Yangın | Danışmanlık & Yapı Çözümleri", description = "Fabrika ve Oteller İçin Mevzuata Uygun Yangın Danışmanlığı & Anahtar Teslim Yapısal Çözümler" } = Astro.props;
+import JsonLd from '../components/JsonLd.astro';
+import { siteConfig } from '../data/site';
+
+const {
+  pageTitle = "Gen Yangın | Yangın Danışmanlığı ve Anahtar Teslim Yapısal Çözümler",
+  description = siteConfig.description,
+  canonical,
+  ogType = "website",
+  noindex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const normalizedPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "");
+const canonicalPath = canonical ?? normalizedPath;
+const canonicalUrl = canonicalPath.startsWith("http")
+  ? canonicalPath
+  : `${siteConfig.siteUrl}${canonicalPath === "/" ? "/" : canonicalPath}`;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteConfig.siteUrl}/#organization`,
+  name: siteConfig.name,
+  legalName: siteConfig.legalName,
+  url: siteConfig.siteUrl,
+  email: siteConfig.email,
+  telephone: siteConfig.phone,
+  sameAs: siteConfig.sameAs,
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteConfig.siteUrl}/#localbusiness`,
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  description: siteConfig.description,
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    ...siteConfig.address,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: siteConfig.geo.latitude,
+    longitude: siteConfig.geo.longitude,
+  },
+  areaServed: [
+    "Manisa",
+    "İzmir",
+    "Aydın",
+    "Denizli",
+    "Muğla",
+    "Balıkesir",
+    "Türkiye",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteConfig.siteUrl}/#website`,
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  publisher: {
+    "@id": `${siteConfig.siteUrl}/#organization`,
+  },
+};
+
+const pageSchemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 
 // Aktif sayfayı yakalamak için url yolunu alıyoruz
 const currentPath = Astro.url.pathname;
@@ -13,6 +83,20 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <JsonLd data={organizationSchema} />
+    <JsonLd data={localBusinessSchema} />
+    <JsonLd data={websiteSchema} />
+    {pageSchemas.map((schema) => schema && <JsonLd data={schema} />)}
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

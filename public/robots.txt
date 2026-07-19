@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://genyangin.com/sitemap-index.xml

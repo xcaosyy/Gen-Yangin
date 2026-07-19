@@ -351,6 +351,34 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <section class="py-16 bg-white border-t border-slate-200/60">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-bold bg-red-50 text-red-600 px-3 py-1.5 rounded-full uppercase tracking-wider">Hızlı Çözüm Sayfaları</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-4">Otel ve Fabrikalar İçin Hedefli Yangın Güvenliği Hizmetleri</h2>
+        <p class="text-slate-600 text-sm mt-3">
+          Manisa ve Ege Bölgesi'nde anahtar teslim yapısal projeler, Türkiye genelinde yangın danışmanlığı için en çok ihtiyaç duyulan başlıklara buradan ulaşabilirsiniz.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          ["/otel-yangin-yonetmeligi", "Otel Yangın Yönetmeliği"],
+          ["/otel-itfaiye-uygunluk-raporu", "Otel İtfaiye Uygunluk Raporu"],
+          ["/fabrika-yangin-yonetmeligi", "Fabrika Yangın Yönetmeliği"],
+          ["/fabrika-itfaiye-uygunluk-raporu", "Fabrika İtfaiye Uygunluk Raporu"],
+          ["/yangin-denetimi-revizyonu", "Yangın Denetimi Revizyonu"],
+          ["/itfaiye-uygunluk-raporu", "İtfaiye Uygunluk Raporu"],
+          ["/yangin-danismanligi", "Yangın Danışmanlığı"],
+          ["/ege-bolgesi-yangin-danismanligi", "Ege Bölgesi Yangın Danışmanlığı"],
+        ].map(([href, label]) => (
+          <a href={href} class="bg-slate-50 hover:bg-red-50 border border-slate-200 hover:border-red-200 rounded-2xl p-5 text-sm font-black text-slate-900 hover:text-red-700 transition">
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="py-16 bg-slate-900 text-white text-center">
     <div class="max-w-3xl mx-auto px-6">
       <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-4">Tesisinizi Ruhsat ve Denetim Süreçlerine Hazırlayalım</h2>

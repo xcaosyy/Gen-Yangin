@@ -1,0 +1,173 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../data/site";
+import type { ServicePageData } from "../data/seo";
+
+interface Props {
+  page: ServicePageData;
+}
+
+const { page } = Astro.props;
+const canonical = `/${page.slug}`;
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: page.h1,
+  description: page.description,
+  provider: {
+    "@type": "LocalBusiness",
+    name: siteConfig.name,
+    telephone: siteConfig.phone,
+    address: {
+      "@type": "PostalAddress",
+      ...siteConfig.address,
+    },
+  },
+  areaServed: ["Manisa", "Ege Bölgesi", "Türkiye"],
+  serviceType: page.eyebrow,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: page.faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  pageTitle={page.title}
+  description={page.description}
+  canonical={canonical}
+  ogType="article"
+  jsonLd={[serviceSchema, faqSchema]}
+>
+  <section class="bg-slate-950 text-white py-20 md:py-24 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--color-red-950),_transparent_48%)]"></div>
+    <div class="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <span class="inline-flex text-xs font-black uppercase tracking-widest bg-red-600/20 text-red-300 border border-red-500/30 px-4 py-2 rounded-full">
+          {page.eyebrow}
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-tight mt-6 mb-5">
+          {page.h1}
+        </h1>
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-3xl">
+          {page.intro}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 mt-8">
+          <a href={siteConfig.whatsapp} target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl text-sm text-center transition">
+            Ücretsiz Ön Keşif
+          </a>
+          <a href={`tel:${siteConfig.phone}`} class="bg-white/10 hover:bg-white/15 text-white font-bold px-6 py-3.5 rounded-xl text-sm text-center transition border border-white/10">
+            {siteConfig.displayPhone}
+          </a>
+        </div>
+      </div>
+      <div class="lg:col-span-4 bg-white/10 border border-white/10 rounded-2xl p-6">
+        <h2 class="text-sm font-black uppercase tracking-widest text-red-200 mb-4">Öncelikli Alanlar</h2>
+        <ul class="space-y-3">
+          {page.sectors.map((sector) => (
+            <li class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-red-500"></span>
+              {sector}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {page.scenarios.map((scenario) => (
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <h2 class="font-black text-slate-900 text-base mb-2">Denetimden kaldıysanız</h2>
+            <p class="text-sm text-slate-600 leading-relaxed">{scenario}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5">
+        <span class="text-red-600 text-xs font-black uppercase tracking-widest">Kontrol Listesi</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-3 mb-4">Sahada Baktığımız Kritik Noktalar</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Her yapı kendi kullanım sınıfı ve risklerine göre değerlendirilir. Bu liste ilk incelemede öne çıkan başlıkları gösterir.
+        </p>
+      </div>
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6">
+        <ul class="space-y-4">
+          {page.checks.map((check) => (
+            <li class="flex gap-3 text-sm text-slate-700 leading-relaxed">
+              <span class="mt-1 w-5 h-5 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xs font-black shrink-0">✓</span>
+              <span>{check}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-red-600 text-xs font-black uppercase tracking-widest">Süreç</span>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight mt-3">Danışmanlıktan Uygulamaya Tek Muhatap</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        {page.process.map((step, index) => (
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+            <div class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center font-black text-sm mb-4">
+              {String(index + 1).padStart(2, "0")}
+            </div>
+            <p class="text-xs text-slate-700 font-semibold leading-relaxed">{step}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight text-center mb-10">Sık Sorulan Sorular</h2>
+      <div class="space-y-4">
+        {page.faqs.map((faq) => (
+          <div class="bg-white border border-slate-200 rounded-2xl p-6">
+            <h3 class="font-black text-slate-900 mb-2">{faq.question}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-slate-950 text-white">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-8 justify-between items-start lg:items-center">
+      <div>
+        <h2 class="text-2xl font-black mb-2">Projenizi yangın yönetmeliğine göre birlikte netleştirelim.</h2>
+        <p class="text-slate-400 text-sm">Otel ve fabrikalarda denetim, ruhsat ve revizyon sürecini tek elden ele alıyoruz.</p>
+      </div>
+      <a href={siteConfig.whatsapp} target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl text-sm whitespace-nowrap transition">
+        WhatsApp ile Görüş
+      </a>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-slate-800 flex flex-wrap gap-3">
+      {page.related.map((item) => (
+        <a href={item.href} class="text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10 transition">
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
