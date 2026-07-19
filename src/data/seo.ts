@@ -36,6 +36,20 @@ export type LocalPageData = {
   related: LinkItem[];
 };
 
+export type GuidePageData = {
+  slug: string;
+  title: string;
+  description: string;
+  h1: string;
+  intro: string;
+  regulationContext: string;
+  keyPoints: string[];
+  inspectionRisks: string[];
+  genYanginApproach: string[];
+  faqs: FaqItem[];
+  related: LinkItem[];
+};
+
 const defaultScenarios = [
   "Denetimden kaldıysanız eksikleri rapor, proje ve uygulama sırasıyla kapatırız.",
   "Yeni açılış, ruhsat, turizm belgesi veya fabrika kuruluş sürecinde dosyanızı en baştan doğru kurarız.",
@@ -422,6 +436,396 @@ export const localPages: Record<string, LocalPageData> = {
       { href: "/fabrika-itfaiye-uygunluk-raporu", label: "Fabrika itfaiye raporu" },
       { href: "/yangin-danismanligi", label: "Yangın danışmanlığı" },
       { href: "/ege-bolgesi-yangin-danismanligi", label: "Ege Bölgesi" },
+    ],
+  },
+};
+
+const guideFaqs: FaqItem[] = [
+  {
+    question: "Bu bilgiler tek başına resmi uygunluk için yeterli mi?",
+    answer:
+      "Hayır. Yangın yönetmeliği değerlendirmesi yapı türü, kullanım sınıfı, kat sayısı, kullanıcı yükü, mevcut proje ve sahadaki uygulamaya göre yapılır. Bu rehberler ön bilgi verir; kesin değerlendirme için saha ve proje incelemesi gerekir.",
+  },
+  {
+    question: "Denetimden kalan işletmeler bu rehberleri nasıl kullanmalı?",
+    answer:
+      "Denetim tutanağındaki eksikleri rehberlerdeki başlıklarla eşleştirebilirler. Gen Yangın, tutanağı ve sahayı birlikte inceleyerek hangi eksiklerin danışmanlık, hangilerinin yapısal uygulama gerektirdiğini netleştirir.",
+  },
+];
+
+export const guidePages: Record<string, GuidePageData> = {
+  "yangin-merdiveni-zorunlulugu": {
+    slug: "yangin-merdiveni-zorunlulugu",
+    title: "Yangın Merdiveni Zorunluluğu | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Yangın merdiveni zorunluluğu, kaçış yolu sayısı, merdiven yeri ve denetim eksikleri hakkında otel ve fabrikalar için pratik yangın yönetmeliği rehberi.",
+    h1: "Yangın Merdiveni Zorunluluğu Nasıl Değerlendirilir?",
+    intro:
+      "Yangın merdiveni zorunluluğu tek bir metrekare veya kat sayısı cevabıyla geçiştirilemez. Yapının kullanım sınıfı, kullanıcı yükü, kaçış yolu sayısı ve mevcut merdivenlerin korunumu birlikte değerlendirilir.",
+    regulationContext:
+      "Binaların Yangından Korunması Hakkında Yönetmelik'te kaçış yolları, çıkış kapasitesi ve kaçış merdivenleri ayrı başlıklar halinde düzenlenir. Özellikle Madde 32, 33 ve kaçış merdivenlerine ilişkin hükümler, yapı özelinde birlikte okunmalıdır.",
+    keyPoints: [
+      "Mevcut merdivenin yangın kaçışı sayılıp sayılamayacağı incelenir.",
+      "Kaçış yolu sayısı ve genişliği kullanıcı yüküne göre değerlendirilir.",
+      "Merdiven yuvası, kapı yönü, duman sızdırmazlık ve yangın dayanımı birlikte kontrol edilir.",
+      "Otel ve fabrikalarda kişi yoğunluğu ve kullanım saati farklı riskler doğurur.",
+    ],
+    inspectionRisks: [
+      "Tek çıkışla yetinilen katlar",
+      "Kaçış merdivenine açılan uygunsuz kapılar",
+      "Merdiven önünde depo, eşya veya üretim malzemesi bulunması",
+      "Yangın merdiveni imalatında statik ve ölçü eksikleri",
+    ],
+    genYanginApproach: [
+      "Mimari projeyi ve mevcut merdivenleri birlikte inceleriz.",
+      "Eksik kaçış yolu veya merdiven ihtiyacını uygulanabilir alternatiflerle çözeriz.",
+      "Gerekirse çelik yangın merdiveni ve kapı uygulamasını anahtar teslim yaparız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/kacis-mesafesi-hesaplama", label: "Kaçış mesafesi" },
+      { href: "/yangin-kapisi-standartlari", label: "Yangın kapısı standartları" },
+      { href: "/yangin-denetimi-revizyonu", label: "Denetim revizyonu" },
+    ],
+  },
+  "kacis-mesafesi-hesaplama": {
+    slug: "kacis-mesafesi-hesaplama",
+    title: "Kaçış Mesafesi Hesaplama | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Kaçış mesafesi, çıkış kapasitesi ve kaçış yolu genişliği hakkında otel, fabrika ve ticari yapılar için yangın yönetmeliği rehberi.",
+    h1: "Kaçış Mesafesi Hesaplama Denetimlerde Neden Kritik?",
+    intro:
+      "Kaçış mesafesi, yangın anında en uzak noktadaki kişinin güvenli çıkışa ulaşabilmesi için temel hesaplardan biridir. Yanlış hesap, ruhsat ve itfaiye denetiminde doğrudan sorun çıkarabilir.",
+    regulationContext:
+      "Yönetmelikte çıkış kapasitesi ve kaçış uzaklığı Madde 32'de, kaçış yolu sayısı ve genişliği ise Madde 33'te ele alınır. Kaçış uzaklığı için kullanım sınıfına göre ek tablolardaki değerler dikkate alınır.",
+    keyPoints: [
+      "En uzak noktanın doğru belirlenmesi gerekir.",
+      "Koridor, oda bölümlenmesi ve üretim yerleşimi hesabı etkiler.",
+      "Çıkış genişliği ve çıkış sayısı kullanıcı yükünden ayrı düşünülemez.",
+      "Otel katları ve fabrika üretim alanları farklı senaryolarla incelenir.",
+    ],
+    inspectionRisks: [
+      "Alternatif çıkış olmadan uzun koridor bırakılması",
+      "Üretim ekipmanlarının kaçış yolunu daraltması",
+      "Acil çıkış kapısına erişimin engellenmesi",
+      "Mimari projede görünen kaçış yolunun sahada kapanmış olması",
+    ],
+    genYanginApproach: [
+      "Saha yerleşimini proje ile karşılaştırırız.",
+      "Kaçış mesafesi ve çıkış genişliği risklerini raporlarız.",
+      "Gereken kapı, koridor veya yönlendirme revizyonlarını uygularız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/yangin-merdiveni-zorunlulugu", label: "Yangın merdiveni" },
+      { href: "/tahliye-projesi", label: "Tahliye projesi" },
+      { href: "/fabrika-yangin-yonetmeligi", label: "Fabrika yangın yönetmeliği" },
+    ],
+  },
+  "sprinkler-zorunlulugu": {
+    slug: "sprinkler-zorunlulugu",
+    title: "Sprinkler Zorunluluğu | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Sprinkler sistemi zorunluluğu, otel ve fabrikalarda otomatik söndürme ihtiyacı ve denetim hazırlığı için yangın yönetmeliği rehberi.",
+    h1: "Sprinkler Sistemi Ne Zaman Zorunlu Olur?",
+    intro:
+      "Sprinkler zorunluluğu yapının kullanım sınıfı, büyüklüğü, risk seviyesi ve mevcut yangın güvenliği kurgusuyla birlikte değerlendirilir.",
+    regulationContext:
+      "Yönetmelikte otomatik söndürme sistemleri ayrı bölümde ele alınır. Sprinkler değerlendirmesi yapılırken yapı kullanım sınıfı, kat/alan bilgisi, yangın yükü ve ilgili teknik standartlar birlikte incelenir.",
+    keyPoints: [
+      "Otel, yurt, fabrika, depo ve otopark gibi yapılarda farklı kriterler doğabilir.",
+      "Sadece sprinkler başlığı değil, su kaynağı, pompa, borulama ve alarm ilişkisi de incelenir.",
+      "Mevcut binalarda uygulama zorluğu ve denetim önceliği birlikte planlanır.",
+      "Yanlış sistem seçimi hem maliyet hem denetim riski üretir.",
+    ],
+    inspectionRisks: [
+      "Yetersiz su deposu veya pompa kapasitesi",
+      "Projesiz veya eksik zonlanmış sprinkler hattı",
+      "Depo raf düzeniyle uyumsuz başlık yerleşimi",
+      "Sistemin algılama ve alarm kurgusundan kopuk kurulması",
+    ],
+    genYanginApproach: [
+      "Yapının sprinkler gereksinimini proje ve saha üzerinden değerlendiririz.",
+      "Gereken mekanik ve yapısal koordinasyonu netleştiririz.",
+      "Otel ve fabrika kullanımına göre uygulanabilir çözüm sırası çıkarırız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/fabrika-yangin-risk-analizi", label: "Fabrika risk analizi" },
+      { href: "/otel-yangin-guvenligi-kontrol-listesi", label: "Otel kontrol listesi" },
+      { href: "/yangin-algilama-sistemi", label: "Yangın algılama sistemi" },
+    ],
+  },
+  "yangin-kapisi-standartlari": {
+    slug: "yangin-kapisi-standartlari",
+    title: "Yangın Kapısı Standartları | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Yangın kapısı standartları, duman sızdırmazlık, panik bar, dayanım süresi ve denetim eksikleri hakkında pratik rehber.",
+    h1: "Yangın Kapısı Standartları Denetimde Nasıl Kontrol Edilir?",
+    intro:
+      "Yangın kapısı yalnızca metal bir kapı değildir. Dayanım belgesi, duman sızdırmazlık, kendiliğinden kapanma, panik bar ve doğru açılış yönü birlikte değerlendirilir.",
+    regulationContext:
+      "Yönetmelikte kaçış yolu kapıları ve yangına dayanımlı geçişler, kaçış güvenliğinin temel parçası olarak ele alınır. Kapı seçimi ilgili standart, belge ve saha montajıyla birlikte değerlendirilmelidir.",
+    keyPoints: [
+      "Kapının yangına dayanım belgesi kontrol edilir.",
+      "Duman sızdırmaz fitil ve kendiliğinden kapanma mekanizması incelenir.",
+      "Panik bar ve açılış yönü tahliye senaryosuna göre değerlendirilir.",
+      "Kapı montajı duvar ve kasa detayıyla birlikte düşünülür.",
+    ],
+    inspectionRisks: [
+      "Belgesiz veya yanlış sınıfta kapı kullanılması",
+      "Kapının kaçış yönünün tersine açılması",
+      "Panik bar olmaması veya çalışmaması",
+      "Kapı çevresindeki boşluklardan duman geçişi oluşması",
+    ],
+    genYanginApproach: [
+      "Mevcut kapıları belge ve saha performansı açısından kontrol ederiz.",
+      "Eksik kapıları doğru sınıf ve donanımla yenileriz.",
+      "Yangın kapısı montajını kaçış yolu ve merdiven kurgusuyla birlikte çözeriz.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/panik-bar-zorunlulugu", label: "Panik bar" },
+      { href: "/yangin-merdiveni-zorunlulugu", label: "Yangın merdiveni" },
+      { href: "/otel-itfaiye-uygunluk-raporu", label: "Otel itfaiye raporu" },
+    ],
+  },
+  "panik-bar-zorunlulugu": {
+    slug: "panik-bar-zorunlulugu",
+    title: "Panik Bar Zorunluluğu | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Panik bar zorunluluğu, acil çıkış kapıları, otel ve fabrika denetim eksikleri için yangın yönetmeliği rehberi.",
+    h1: "Panik Bar Zorunluluğu Hangi Kapılarda Gündeme Gelir?",
+    intro:
+      "Panik bar, acil durumda kapının hızlı ve tereddütsüz açılmasını sağlayan hayati bir donanımdır. Özellikle yoğun kullanıcı bulunan alanlarda denetimlerin sık baktığı başlıklardan biridir.",
+    regulationContext:
+      "Kaçış yolu kapıları, tahliye güvenliğinin parçası olarak değerlendirilir. Panik bar ihtiyacı kapının konumu, kullanıcı yoğunluğu ve tahliye senaryosuyla birlikte incelenir.",
+    keyPoints: [
+      "Acil çıkış kapılarında hızlı açılma gerekliliği kontrol edilir.",
+      "Kapı yönü ve panik bar çalışma durumu birlikte incelenir.",
+      "Otel koridorları ve fabrika çıkışları farklı kullanım yoğunluğuna sahiptir.",
+      "Panik bar tek başına yeterli değildir; kapı sınıfı ve montajı da doğru olmalıdır.",
+    ],
+    inspectionRisks: [
+      "Kilitli veya zor açılan acil çıkış kapıları",
+      "Panik barın kapı kanadıyla uyumsuz olması",
+      "Kapı önünde eşya veya üretim malzemesi bulunması",
+      "Panik barın bakımının yapılmaması",
+    ],
+    genYanginApproach: [
+      "Acil çıkış kapılarını tahliye senaryosuna göre inceleriz.",
+      "Eksik panik bar ve kapı donanımlarını uygun ürünlerle yenileriz.",
+      "Kapı, yönlendirme ve kaçış yolunu birlikte teslim ederiz.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/yangin-kapisi-standartlari", label: "Yangın kapısı" },
+      { href: "/acil-yonlendirme-ve-aydinlatma", label: "Acil yönlendirme" },
+      { href: "/yangin-denetimi-revizyonu", label: "Denetim revizyonu" },
+    ],
+  },
+  "duman-tahliye-sistemi": {
+    slug: "duman-tahliye-sistemi",
+    title: "Duman Tahliye Sistemi | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Duman tahliye sistemi, merdiven basınçlandırma, otel ve fabrika duman kontrol riskleri için yangın yönetmeliği rehberi.",
+    h1: "Duman Tahliye Sistemi Neden Yangın Güvenliğinin Merkezindedir?",
+    intro:
+      "Yangınlarda can güvenliği açısından duman kontrolü en az alev kontrolü kadar önemlidir. Kaçış yollarının dumandan korunması, tahliyenin sürdürülebilmesini sağlar.",
+    regulationContext:
+      "Yönetmelikte duman kontrolü ve kaçış yollarının korunumu ayrı başlıklarla ele alınır. Duman tahliye ihtiyacı yapı yüksekliği, kullanım sınıfı, merdiven yuvası ve kapalı alan düzeniyle birlikte değerlendirilir.",
+    keyPoints: [
+      "Kaçış merdiveni ve koridorların duman kontrolü incelenir.",
+      "Doğal veya mekanik tahliye ihtiyacı yapı özelinde belirlenir.",
+      "Basınçlandırma, damper ve fan senaryoları birlikte düşünülür.",
+      "Otel ve fabrikalarda duman yayılım yolları farklıdır.",
+    ],
+    inspectionRisks: [
+      "Merdiven yuvasına duman sızması",
+      "Çalışmayan veya projeye uygun olmayan fanlar",
+      "Duman tahliye açıklıklarının kapatılması",
+      "Yangın algılama sistemiyle ilişkilendirilmemiş duman kontrolü",
+    ],
+    genYanginApproach: [
+      "Duman yayılımını mimari ve mekanik açıdan değerlendiririz.",
+      "Kaçış yollarını koruyacak uygulanabilir revizyonları belirleriz.",
+      "Kapı, yönlendirme, algılama ve duman kontrolünü birlikte ele alırız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/yangin-algilama-sistemi", label: "Yangın algılama" },
+      { href: "/kacis-mesafesi-hesaplama", label: "Kaçış mesafesi" },
+      { href: "/fabrika-itfaiye-uygunluk-raporu", label: "Fabrika raporu" },
+    ],
+  },
+  "acil-yonlendirme-ve-aydinlatma": {
+    slug: "acil-yonlendirme-ve-aydinlatma",
+    title: "Acil Yönlendirme ve Aydınlatma | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Acil yönlendirme levhaları, acil aydınlatma, tahliye güzergahı ve yangın denetimi eksikleri için rehber.",
+    h1: "Acil Yönlendirme ve Aydınlatma Denetimde Nasıl Değerlendirilir?",
+    intro:
+      "Acil yönlendirme ve aydınlatma, yangın anında insanların güvenli çıkışı bulmasını sağlar. Levhanın varlığı kadar doğru konumu, görünürlüğü ve enerji sürekliliği de önemlidir.",
+    regulationContext:
+      "Yönetmelikte kaçış yollarının erişilebilir ve kullanılabilir olması temel ilkedir. Acil yönlendirme ve aydınlatma bu ilkenin sahadaki görünür parçasıdır.",
+    keyPoints: [
+      "Acil çıkış yönleri açık ve anlaşılır olmalıdır.",
+      "Aydınlatma kesintiye karşı destekli olmalıdır.",
+      "Levhalar kapı, koridor ve merdiven karar noktalarına göre yerleştirilmelidir.",
+      "Fabrikalarda üretim yerleşimi, otellerde misafir yönlendirmesi ayrıca değerlendirilir.",
+    ],
+    inspectionRisks: [
+      "Eksik veya yanlış yön gösteren levhalar",
+      "Enerji kesildiğinde çalışmayan acil aydınlatmalar",
+      "Görüşü kapanmış yönlendirme armatürleri",
+      "Saha değiştiği halde güncellenmeyen tahliye yönleri",
+    ],
+    genYanginApproach: [
+      "Tahliye güzergahını yerinde yürüyerek kontrol ederiz.",
+      "Eksik yönlendirme ve acil aydınlatma noktalarını belirleriz.",
+      "Montaj ve revizyonu kaçış planıyla uyumlu hale getiririz.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/tahliye-projesi", label: "Tahliye projesi" },
+      { href: "/panik-bar-zorunlulugu", label: "Panik bar" },
+      { href: "/otel-yangin-guvenligi-kontrol-listesi", label: "Otel kontrol listesi" },
+    ],
+  },
+  "tahliye-projesi": {
+    slug: "tahliye-projesi",
+    title: "Tahliye Projesi | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Tahliye projesi, kaçış yolları, yangın merdiveni, acil yönlendirme ve itfaiye denetimi hazırlığı için pratik rehber.",
+    h1: "Tahliye Projesi Hangi İşletmeler İçin Kritik Hale Gelir?",
+    intro:
+      "Tahliye projesi, binadaki insanların yangın anında hangi yoldan ve hangi kapasiteyle güvenli alana ulaşacağını gösteren planlı güvenlik kurgusudur.",
+    regulationContext:
+      "Yönetmelikte tahliye projeleri ve kaçış düzenlemeleri yapı kullanımına göre ele alınır. Büyük ve karmaşık yapılarda tahliye projesinin mimari projeden ayrı değerlendirilmesi gerekebilir.",
+    keyPoints: [
+      "Kaçış rotaları ve alternatif çıkışlar gösterilmelidir.",
+      "Yangın merdiveni, yangın kapısı ve acil yönlendirme projeyle uyumlu olmalıdır.",
+      "Otel, fabrika ve depo gibi yapılarda kullanıcı davranışı farklıdır.",
+      "Sahadaki gerçek kullanım proje ile karşılaştırılmalıdır.",
+    ],
+    inspectionRisks: [
+      "Eski mimari projeye göre hazırlanmış tahliye planı",
+      "Sahada kapatılmış veya daraltılmış kaçış yolu",
+      "Yönlendirme ile tahliye planının çelişmesi",
+      "İtfaiyenin ulaşması gereken planların sahada bulunmaması",
+    ],
+    genYanginApproach: [
+      "Mevcut proje ve saha kullanımını karşılaştırırız.",
+      "Tahliye kurgusunu kaçış mesafesi ve çıkış kapasitesiyle birlikte değerlendiririz.",
+      "Gerekli yapısal ve yönlendirme revizyonlarını uygularız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/kacis-mesafesi-hesaplama", label: "Kaçış mesafesi" },
+      { href: "/acil-yonlendirme-ve-aydinlatma", label: "Acil yönlendirme" },
+      { href: "/itfaiye-uygunluk-raporu", label: "İtfaiye uygunluk raporu" },
+    ],
+  },
+  "yangin-algilama-sistemi": {
+    slug: "yangin-algilama-sistemi",
+    title: "Yangın Algılama Sistemi | Yangın Yönetmeliği Rehberi | Gen Yangın",
+    description:
+      "Yangın algılama sistemi, adresli algılama, duman dedektörü, otel ve fabrika denetim eksikleri için pratik rehber.",
+    h1: "Yangın Algılama Sistemi Denetimlerde Nasıl İncelenir?",
+    intro:
+      "Yangın algılama sistemi, yangının erken fark edilmesini ve tahliye sürecinin zamanında başlamasını sağlar. Dedektör sayısı kadar zonlama, panel, alarm ve saha yerleşimi de önemlidir.",
+    regulationContext:
+      "Yönetmelikte algılama ve uyarı sistemleri, yapının kullanım sınıfı ve risklerine göre değerlendirilir. Otel odaları, koridorlar, üretim alanları ve depolar aynı algılama mantığıyla ele alınmaz.",
+    keyPoints: [
+      "Dedektör tipi ve yerleşimi kullanım alanına göre seçilmelidir.",
+      "Adresli sistemlerde zonlama ve panel organizasyonu kontrol edilir.",
+      "Alarm, acil anons ve duman kontrol ilişkisi birlikte düşünülür.",
+      "Bakım ve test kayıtları denetim güveni açısından önemlidir.",
+    ],
+    inspectionRisks: [
+      "Eksik dedektör yerleşimi",
+      "Kör nokta oluşturan tavan veya bölme değişiklikleri",
+      "Devre dışı bırakılmış algılama bölgeleri",
+      "Alarm senaryosuyla uyumsuz panel ayarları",
+    ],
+    genYanginApproach: [
+      "Algılama ihtiyacını oda, koridor, üretim ve depo bazında inceleriz.",
+      "Sistem eksiklerini yangın senaryosuyla birlikte raporlarız.",
+      "Algılama, yönlendirme ve tahliye kurgusunu birlikte optimize ederiz.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/duman-tahliye-sistemi", label: "Duman tahliye" },
+      { href: "/sprinkler-zorunlulugu", label: "Sprinkler" },
+      { href: "/otel-yangin-yonetmeligi", label: "Otel yangın yönetmeliği" },
+    ],
+  },
+  "otel-yangin-guvenligi-kontrol-listesi": {
+    slug: "otel-yangin-guvenligi-kontrol-listesi",
+    title: "Otel Yangın Güvenliği Kontrol Listesi | Gen Yangın",
+    description:
+      "Oteller için yangın güvenliği kontrol listesi: itfaiye raporu, yangın kapısı, algılama, kaçış yolları, acil yönlendirme ve turizm belgesi hazırlığı.",
+    h1: "Otel Yangın Güvenliği Kontrol Listesi",
+    intro:
+      "Otellerde yangın güvenliği misafirlerin binayı tanımaması nedeniyle hassas bir konudur. Oda, koridor, merdiven, algılama ve yönlendirme bütün olarak kontrol edilmelidir.",
+    regulationContext:
+      "Konaklama amaçlı binalar yönetmelikte ayrı kullanım sınıfı olarak değerlendirilir. Otellerde gece kullanımı, oda bölümlenmesi ve misafir tahliyesi nedeniyle yangın güvenliği başlıkları daha sıkı ele alınır.",
+    keyPoints: [
+      "Oda ve koridorlarda algılama sistemi kontrol edilir.",
+      "Yangın kapıları, panik barlar ve kaçış yönleri incelenir.",
+      "Acil yönlendirme ve aydınlatma misafir gözüyle test edilir.",
+      "Turizm belgesi ve itfaiye uygunluk süreci birlikte planlanır.",
+    ],
+    inspectionRisks: [
+      "Oda koridorlarında eksik dedektör",
+      "Yangın kapılarının açık tutulması veya duman sızdırması",
+      "Gizlenmiş ya da yanlış konumlanmış acil yönlendirme",
+      "Eski binada yeni kullanım şartlarına göre revizyon yapılmaması",
+    ],
+    genYanginApproach: [
+      "Otelin misafir tahliye senaryosunu sahada test ederiz.",
+      "Turizm ve itfaiye denetimi için eksik listesini önceliklendiririz.",
+      "Yangın kapısı, yönlendirme ve yapısal revizyonları anahtar teslim tamamlarız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/otel-yangin-yonetmeligi", label: "Otel yangın yönetmeliği" },
+      { href: "/otel-itfaiye-uygunluk-raporu", label: "Otel itfaiye raporu" },
+      { href: "/mugla-yangin-danismanligi", label: "Muğla otel danışmanlığı" },
+    ],
+  },
+  "fabrika-yangin-risk-analizi": {
+    slug: "fabrika-yangin-risk-analizi",
+    title: "Fabrika Yangın Risk Analizi | Gen Yangın",
+    description:
+      "Fabrikalar için yangın risk analizi: üretim alanı, depo, kaçış yolları, yangın kapısı, algılama, söndürme ve itfaiye denetimi hazırlığı.",
+    h1: "Fabrika Yangın Risk Analizi Nasıl Yapılır?",
+    intro:
+      "Fabrikalarda yangın riski üretim prosesi, hammadde, elektrik panoları, depo düzeni ve insan yoğunluğu ile birlikte değerlendirilmelidir.",
+    regulationContext:
+      "Endüstriyel yapılar ve depolama amaçlı tesisler yönetmelikte kullanım sınıflarına göre değerlendirilir. Yangın yükü, kaçış yolları, söndürme ve algılama sistemleri birlikte ele alınmalıdır.",
+    keyPoints: [
+      "Üretim ve depo alanları ayrı risk başlığı olarak incelenir.",
+      "Kaçış yolları üretim yerleşimiyle birlikte kontrol edilir.",
+      "Yangın dolabı, algılama, söndürme ve yönlendirme bütün halinde değerlendirilir.",
+      "OSB veya belediye denetimi öncesi eksikler uygulanabilir sıraya konur.",
+    ],
+    inspectionRisks: [
+      "Depolama düzeninin kaçış yolunu daraltması",
+      "Elektrik panosu ve yanıcı malzeme yakınlığı",
+      "Yangın kapılarının üretim akışı nedeniyle açık bırakılması",
+      "Eski yerleşim planına göre kalmış tahliye kurgusu",
+    ],
+    genYanginApproach: [
+      "Üretimi durdurmadan uygulanabilecek revizyon sırası çıkarırız.",
+      "Denetim eksiklerini yapısal ve sistemsel başlıklara ayırırız.",
+      "Yangın kapısı, kaçış yolu ve yönlendirme uygulamasını sahada tamamlarız.",
+    ],
+    faqs: guideFaqs,
+    related: [
+      { href: "/fabrika-yangin-yonetmeligi", label: "Fabrika yangın yönetmeliği" },
+      { href: "/fabrika-itfaiye-uygunluk-raporu", label: "Fabrika itfaiye raporu" },
+      { href: "/manisa-yangin-danismanligi", label: "Manisa fabrika danışmanlığı" },
     ],
   },
 };

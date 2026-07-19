@@ -57,6 +57,26 @@ for (const route of localRoutes) {
   assertIncludes(route, "Gen Yangın");
 }
 
+const guideRoutes = [
+  "yangin-merdiveni-zorunlulugu/index.html",
+  "kacis-mesafesi-hesaplama/index.html",
+  "sprinkler-zorunlulugu/index.html",
+  "yangin-kapisi-standartlari/index.html",
+  "panik-bar-zorunlulugu/index.html",
+  "duman-tahliye-sistemi/index.html",
+  "acil-yonlendirme-ve-aydinlatma/index.html",
+  "tahliye-projesi/index.html",
+  "yangin-algilama-sistemi/index.html",
+  "otel-yangin-guvenligi-kontrol-listesi/index.html",
+  "fabrika-yangin-risk-analizi/index.html",
+];
+
+for (const route of guideRoutes) {
+  assertExists(join("dist", route));
+  assertIncludes(route, "Yangın Yönetmeliği Rehberi");
+  assertIncludes(route, "Gen Yangın");
+}
+
 const layoutSource = readFileSync(join(root, "src/layouts/Layout.astro"), "utf8");
 assert.ok(
   !layoutSource.includes("/mugla-yangin-danismanligi"),
