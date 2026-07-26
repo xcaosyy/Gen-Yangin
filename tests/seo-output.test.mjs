@@ -24,6 +24,9 @@ function assertExists(path) {
 assertIncludes("index.html", '<link rel="canonical" href="https://genyangin.com/"');
 assertIncludes("index.html", 'property="og:title"');
 assertIncludes("index.html", '"@type":"LocalBusiness"');
+assertIncludes("index.html", "/site-haritasi");
+assertIncludes("index.html", "/yangin-danismanligi");
+assertIncludes("index.html", "/itfaiye-uygunluk-raporu");
 assertExists("public/robots.txt");
 
 const commercialRoutes = [
@@ -82,5 +85,11 @@ assert.ok(
   !layoutSource.includes("/mugla-yangin-danismanligi"),
   "City pages must not be listed in the global layout navigation",
 );
+
+assertExists("dist/site-haritasi/index.html");
+assertIncludes("site-haritasi/index.html", "Gen Yangın Site Haritası");
+assertIncludes("site-haritasi/index.html", "/yangin-merdiveni-zorunlulugu");
+assertIncludes("site-haritasi/index.html", "/fabrika-yangin-yonetmeligi");
+assertIncludes("site-haritasi/index.html", "/manisa-yangin-danismanligi");
 
 console.log("SEO output checks passed.");

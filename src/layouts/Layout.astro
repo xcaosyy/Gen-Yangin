@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import JsonLd from '../components/JsonLd.astro';
-import { siteConfig } from '../data/site';
+import { discoveryLinks, siteConfig } from '../data/site';
 
 const {
   pageTitle = "Gen Yangın | Yangın Danışmanlığı ve Anahtar Teslim Yapısal Çözümler",
@@ -213,16 +213,18 @@ const currentPath = Astro.url.pathname;
         <div>
           <h5 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Hizmetler</h5>
           <ul class="space-y-2 text-sm font-medium">
-            <li>Mevzuat Danışmanlığı & Risk Analizi</li>
-            <li>Kaçış Yolları & Tahliye Planlaması</li>
-            <li>Yapısal Uygulamalar & Mimari Tadilat</li>
-            <li>Eğitici Eğitimi & Belgelendirme</li>
+            {discoveryLinks.primary.slice(0, 5).map((link) => (
+              <li>
+                <a href={link.href} class="hover:text-white transition">{link.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
           <h5 class="text-white text-sm font-bold uppercase tracking-wider mb-4">İletişim</h5>
           <p class="text-sm font-bold text-slate-300">📧 info@genyangin.com</p>
           <p class="text-sm font-bold text-slate-300 mt-1">📞 0 533 662 62 10</p>
+          <a href="/site-haritasi" class="inline-block text-sm font-bold text-slate-300 hover:text-white transition mt-4">Site Haritası</a>
         </div>
       </div>
       <div class="max-w-6xl mx-auto px-6 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-xs gap-4 font-medium">

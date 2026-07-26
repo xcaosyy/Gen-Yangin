@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { guidePages, localPages, servicePages } from '../data/seo';
+
+const mainPages = [
+  { href: "/", label: "Anasayfa" },
+  { href: "/hizmetler", label: "Hizmetler" },
+  { href: "/yonetmelik", label: "Yangın Yönetmeliği" },
+  { href: "/yangin-sozlugu", label: "Yangın Sözlüğü" },
+  { href: "/yangin-mevzuati-revizyonlari", label: "Yangın Mevzuatı Revizyonları" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/iletisim", label: "İletişim" },
+];
+
+const groups = [
+  { title: "Ana Sayfalar", links: mainPages },
+  {
+    title: "Hizmetler",
+    links: Object.values(servicePages).map((page) => ({
+      href: `/${page.slug}`,
+      label: page.h1,
+    })),
+  },
+  {
+    title: "Yerel Hizmet Sayfaları",
+    links: Object.values(localPages).map((page) => ({
+      href: `/${page.slug}`,
+      label: page.h1,
+    })),
+  },
+  {
+    title: "Yangın Yönetmeliği Rehberleri",
+    links: Object.values(guidePages).map((page) => ({
+      href: `/${page.slug}`,
+      label: page.h1,
+    })),
+  },
+];
+---
+
+<Layout
+  pageTitle="Gen Yangın Site Haritası | Hizmet ve Rehber Sayfaları"
+  description="Gen Yangın hizmet, yerel yangın danışmanlığı ve yangın yönetmeliği rehber sayfalarının tamamı."
+>
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-12">
+        <span class="text-red-600 font-bold tracking-wider text-sm uppercase">GEN YANGIN</span>
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mt-3">Gen Yangın Site Haritası</h1>
+        <p class="text-slate-600 text-base md:text-lg mt-4 leading-relaxed">
+          Yangın danışmanlığı, itfaiye uygunluk raporu, otel ve fabrika yangın yönetmeliği, yerel hizmet ve rehber sayfalarımıza buradan ulaşabilirsiniz.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {groups.map((group) => (
+          <section>
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-5">{group.title}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {group.links.map((link) => (
+                <a href={link.href} class="bg-slate-50 hover:bg-slate-900 border border-slate-200 hover:border-slate-900 rounded-xl p-5 transition group">
+                  <span class="text-sm font-black text-slate-900 group-hover:text-white leading-snug">{link.label}</span>
+                  <span class="block text-xs font-bold text-slate-500 group-hover:text-slate-300 mt-3">{link.href}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

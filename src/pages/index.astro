@@ -2,6 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Referanslar from '../components/referanslar.astro';
 import Instagram from '../components/instagram.astro';
+import { discoveryLinks } from '../data/site';
+
+const quickStartLinks = [
+  ...discoveryLinks.primary.slice(0, 5),
+  discoveryLinks.guides[0],
+  discoveryLinks.guides[5],
+  discoveryLinks.utility[0],
+];
 ---
 
 <Layout
@@ -28,6 +36,30 @@ import Instagram from '../components/instagram.astro';
         <a href="/hizmetler" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold px-8 py-4 rounded-xl transition text-center border border-slate-200">
           Sektörel Çözümlerimiz & Standartlar 🏢
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white border-t border-slate-200/70">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+        <div class="max-w-3xl">
+          <span class="text-red-600 font-bold tracking-wider text-sm uppercase">HIZLI BAŞLANGIÇ</span>
+          <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-2">İşletmeniz İçin Doğru Konudan Başlayın</h2>
+          <p class="text-slate-600 text-sm md:text-base mt-3 leading-relaxed">
+            Otel, fabrika, itfaiye raporu ve yangın yönetmeliği süreçlerinde en sık ihtiyaç duyulan başlıkları tek noktada topladık.
+          </p>
+        </div>
+        <a href="/site-haritasi" class="text-sm font-black text-red-600 hover:text-red-700 transition">Tüm sayfaları görüntüle</a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {quickStartLinks.map((link) => (
+          <a href={link.href} class="group bg-slate-50 hover:bg-slate-900 border border-slate-200 hover:border-slate-900 rounded-xl p-5 transition">
+            <span class="block text-sm font-black text-slate-900 group-hover:text-white leading-snug">{link.label}</span>
+            <span class="block text-xs font-bold text-slate-500 group-hover:text-slate-300 mt-3">İncele</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
