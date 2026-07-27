@@ -1,120 +1,186 @@
-# Randevu Sistemi Tasarım Kaydı
+# Randevu Sistemi Tasarımı
 
 **Tarih:** 27 Temmuz 2026
-**Durum:** Tasarım görüşmesi devam ediyor; uygulama kodlaması henüz başlamadı.
 
-Bu belge, Google Apps Script ile çalışan mevcut seans takviminin daha güvenli,
-güvenilir ve iPhone bildirimlerini destekleyen yeni bir sisteme dönüştürülmesi
-için şimdiye kadar alınan kararları kaydeder.
+**Durum:** Tasarım bölümleri kullanıcı tarafından onaylandı. Belge, uygulama
+planına geçilmeden önce kullanıcı incelemesine sunulacaktır.
 
-## Görüşmenin kaldığı yer
+## 1. Amaç
 
-Kullanıcı aşağıdaki bölümleri onayladı:
+Google Apps Script ile çalışan mevcut seans takvimi; daha güvenilir kayıt
+yapan, iPhone ana ekranına kurulabilen, uygulama kapalıyken bildirim
+gönderebilen ve ayrıntılı rapor üreten yeni bir sisteme dönüştürülecektir.
 
-1. Cloudflare tabanlı temel altyapı
-2. Kullanıcılar, giriş ve görev devri
-3. Takvim ve randevu akışı
-4. Günlük bildirim akışı
-5. Danışan arama ve raporlama
-6. Birleşik haftalık/günlük takvim arayüzü
+Sistem şu süreci düzenler:
 
-Son sunulan **veri taşıma, önbellek ve hata güvenliği** bölümü henüz kullanıcı
-tarafından onaylanmadı. Bir sonraki görüşme bu bölümün onayı veya revizyonuyla
-başlamalıdır.
+1. Vatandaş çağrı merkezini arar.
+2. Talep Bridge sistemi üzerinden birime iletilir.
+3. Tıbbi sekreter Bridge'deki bilgiyi görüp randevuyu yeni sisteme manuel girer.
+4. Psikolog seans sonrasında randevu durumunu kaydeder.
+5. Sekreter gün sonu işlemlerini takip eder.
+6. Psikolog, yetkili rapor ekranından aylık sonuçları inceler ve dışa aktarır.
 
-## Mevcut sistem
+Bridge ile yazılımsal entegrasyon yapılmayacaktır.
 
-Mevcut uygulama Google Apps Script projesidir:
+## 2. Kapsam
+
+- İlk sürüm tek psikoloğun takvimi için hazırlanır.
+- İleride ikinci psikolog eklenirse uygulama ve veriler ayrı bir örnek olarak
+  çoğaltılabilir.
+- Başlangıçta dört kullanıcı vardır: Psikolog/Yönetici, Dilara, Medine ve Ecem.
+- Danışan için yalnızca ad ve soyad saklanır.
+- Telefon ve adres ilk sürümde saklanmaz.
+- Uygulama Türkçe ve öncelikle iPhone kullanımına uygun olacaktır.
+
+### Kapsam dışı
+
+- Bridge entegrasyonu
+- WhatsApp, SMS veya e-posta bildirimi
+- App Store üzerinden yerel iPhone uygulaması
+- Telefon ve adres kaydı
+- Aynı veritabanını paylaşan çok psikologlu yapı
+- Herkese açık tanıtım sitesi
+
+## 3. Mevcut sistemde belirlenen sorunlar
+
+Mevcut Google Apps Script projesi:
 
 `https://script.google.com/home/projects/12TStIAo0z18lKv2miPG1CARRwmrNZdx4tQ8RpXgQuLDKZyd7GwvdAjLx/edit?hl=tr`
 
-İnceleme sırasında görülen temel yapı:
+İncelemede görülen temel riskler:
 
-- Tek bir Apps Script sunucu dosyası ve tek, büyük bir HTML arayüz dosyası vardır.
 - Randevular tek bir JSON dizisi olarak User Properties alanında tutulmaktadır.
-- Her değişiklikte bütün randevu dizisi yeniden kaydedilmektedir.
-- Kayıt çağrıları asenkron çalışmakta; başarı ve hata geri bildirimi yetersizdir.
-- Birden fazla sürüm bağlantısı bulunduğu için eski bağlantının kullanılma riski vardır.
-- İki habersiz iptal uyarısı, kısıtlama süresinin dolup dolmadığını kontrol etmediği
-  için aylar sonra da devam edebilmektedir.
-- Mevcut rapor çift seansı iki işlem saymaktadır; yeni sistemde bu davranış
-  değiştirilecektir.
+- Her değişiklikte bütün dizi yeniden kaydedilmektedir.
+- Eşzamanlı kayıtlar birbirini ezebilir.
+- Asenkron kayıtların başarı ve hata geri bildirimi yetersizdir.
+- Birden fazla dağıtım bağlantısı eski sürümün kullanılmasına yol açabilir.
+- Büyük tek HTML dosyası bakım ve sürüm yönetimini zorlaştırmaktadır.
+- İki habersiz iptal uyarısı, kısıtlama bitişini tarihe göre kontrol etmediği
+  için aylar sonra da görünebilmektedir.
+- Mevcut rapor çift seansı iki işlem saymaktadır.
 
-Yeni sistem eski Apps Script uygulamasını genişletmek yerine ayrı ve kalıcı bir
-uygulama olarak kurulacaktır.
+Yeni sistem, mevcut projeyi büyütmek yerine ayrı bir uygulama olarak kurulacaktır.
 
-## Kullanım amacı ve kapsam
+## 4. Teknik mimari
 
-- Sistem Manisa Yunusemre Belediyesi bünyesinde çalışan bir psikoloğun seans
-  randevularını düzenlemek için kullanılacaktır.
-- Vatandaş talebi Bridge sistemi üzerinden gelir; Bridge ile yazılımsal
-  entegrasyon yapılmayacaktır.
-- Tıbbi sekreter talebi Bridge üzerinden görüp randevuyu yeni sisteme manuel girer.
-- İlk sürümde yalnızca danışanın ad ve soyadı saklanır.
-- Telefon ve adres ilk sürüm kapsamına alınmaz.
-- Sistem tek psikolog için hazırlanır. İleride ikinci psikolog eklenirse aynı
-  sistem ayrı verilerle çoğaltılabilir.
+Yeni sistem Cloudflare üzerinde çalışan bir PWA olacaktır.
 
-## Onaylanan altyapı
+### Bileşenler
 
-Yeni uygulama Cloudflare üzerinde çalışan bir PWA olacaktır:
+- **Cloudflare Worker:** Arayüzü, güvenli API'yi ve bütün iş kurallarını çalıştırır.
+- **Cloudflare D1:** Kullanıcıları, danışanları, randevuları ve işlem geçmişini
+  ilişkisel veritabanında saklar.
+- **Cloudflare Cron:** Hatırlatma zamanlarını Türkiye saatine göre kontrol eder.
+- **Web Push:** Her kayıtlı iPhone için kapalı uygulama bildirimi gönderir.
+- **Cloudflare R2:** Şifreli uzun süreli yedekleri saklar.
+- **PWA servis çalışanı:** Yalnızca sürümlenmiş uygulama ekran dosyalarını
+  önbelleğe alır.
 
-- Cloudflare Worker: güvenli uygulama hizmetleri ve iş kuralları
-- Cloudflare D1: kalıcı ilişkisel veritabanı
-- Zamanlanmış Cloudflare görevi: hatırlatma kontrolleri
-- Standart Web Push: iPhone kapalıyken bildirim
-- PWA: iPhone ana ekranına eklenen tam ekran web uygulaması
-- PDF ve Excel: talep anında oluşturulan rapor çıktıları
+Arayüz ve API aynı Worker alanından sunulur. Böylece ayrı sunucu, ücretli mesaj
+servisi veya App Store üyeliği gerekmez.
 
-Uygulama dört kullanıcı ve mevcut randevu hacmiyle Cloudflare ücretsiz plan
-sınırları içinde çalışacak şekilde tasarlanacaktır. Ücretli WhatsApp, SMS,
-Apple Developer üyeliği veya App Store yayını gerekmeyecektir.
+### Temel veri akışı
 
-## Kullanıcılar ve yetkiler
+1. Kullanıcı PWA'yı açar ve geçerli cihaz oturumuyla kimliği doğrulanır.
+2. Takvim verisi D1'den güncel olarak alınır.
+3. Kullanıcı bir işlem gönderir.
+4. Worker yetkiyi, tarih kurallarını ve saat çakışmasını doğrular.
+5. D1 işlemi tek parça halinde kaydeder.
+6. Aynı işlem içinde değiştirilemeyen hareket kaydı oluşturulur.
+7. Veritabanı başarı vermeden arayüz işlemi tamamlanmış göstermez.
 
-Sistemde başlangıçta dört kişisel hesap olacaktır:
+## 5. Kalıcı adres ve indekslenmeme
 
-- Psikolog/Yönetici
-- Dilara
-- Medine
-- Ecem
+Uygulama ücretsiz `workers.dev` adresinde çalışacaktır. Adres şu yapıda olacaktır:
 
-Tüm kullanıcılar randevu ekleyebilir, taşıyabilir, durumunu değiştirebilir,
-silebilir ve danışan araması yapabilir.
+`seans-takvimi-ozelkod.hesapadi.workers.dev`
+
+Uygulama teknik olarak internetten erişilebilen bir adrese sahip olsa da arama
+motoru sonuçlarına girmemesi için:
+
+- Bütün HTML cevaplarında `meta robots` değeri `noindex, nofollow, noarchive` olur.
+- Bütün cevaplarda eşdeğer `X-Robots-Tag` başlığı gönderilir.
+- Herkese açık site haritası veya içerik sayfası oluşturulmaz.
+- Giriş yapılmadan hiçbir danışan, takvim, rapor veya işlem verisi döndürülmez.
+
+Adresin bilinmemesi bir güvenlik yöntemi sayılmaz. Asıl güvenlik giriş, oturum ve
+sunucu tarafı yetki kontrolleriyle sağlanır.
+
+## 6. Kullanıcılar, roller ve oturumlar
+
+### Kullanıcılar
+
+- **Psikolog/Yönetici**
+- **Dilara**
+- **Medine**
+- **Ecem**
+
+Tüm kullanıcılar:
+
+- Randevu ekleyebilir.
+- Randevu taşıyabilir.
+- Randevu durumunu değiştirebilir.
+- Randevu silebilir.
+- Danışan arayabilir.
+- Takvimi ve geçmiş randevuları görebilir.
 
 Yalnızca Psikolog/Yönetici:
 
-- Rapor bölümünü görür.
-- Kullanıcı ekler veya devre dışı bırakır.
-- PIN sıfırlar.
-- Kayıp ya da kullanılmayan cihaz oturumunu kapatır.
-- Gerekirse aktif sorumlu sekreteri değiştirir.
-- Değiştirilemeyen işlem geçmişini görür.
+- Rapor bölümünü açabilir.
+- Kullanıcı ekleyebilir veya devre dışı bırakabilir.
+- PIN sıfırlayabilir.
+- Kayıp cihaz oturumunu iptal edebilir.
+- Aktif sorumlu sekreteri değiştirebilir.
+- Yedek indirebilir ve geri yükleme başlatabilir.
+- Değiştirilemeyen işlem geçmişini görebilir.
 
-## Giriş ve oturum
+Yetkiler yalnızca ekranda düğme gizleyerek değil, her API çağrısında sunucu
+tarafında denetlenir.
 
-- Her kullanıcının adıyla ilişkili kişisel bir kullanıcı hesabı vardır.
+### Giriş
+
+- Sekreter kullanıcı adları `dilara`, `medine` ve `ecem` olacaktır.
+- Yönetici kullanıcı adı ilk kurulumda psikolog tarafından seçilecektir.
 - Her kullanıcıya ayrı, altı haneli PIN verilir.
-- PIN açık metin olarak saklanmaz.
-- Beş yanlış denemeden sonra geçici giriş kilidi uygulanır.
-- Aynı iPhone kullanılmaya devam edildiği sürece tekrar tekrar giriş istenmez.
-- Yeniden giriş; kullanıcı çıkış yaptığında, telefon verileri silindiğinde,
-  telefon değiştiğinde veya yönetici oturumu iptal ettiğinde gerekir.
-- Her telefon için ayrı ve iptal edilebilir oturum tutulur.
+- PIN açık metin olarak saklanmaz veya günlük kayıtlarına yazılmaz.
+- PIN, kullanıcıya özel tuz ve yalnızca sunucuda bulunan gizli anahtarla
+  yavaşlatılmış biçimde doğrulanır.
+- Aynı hesapta beş yanlış deneme sonrası 15 dakika giriş kilidi uygulanır.
+- Deneme sınırı hem hesap hem bağlantı kaynağı için kontrol edilir.
 
-## Görev devri
+### Kalıcı cihaz oturumu
 
-- Normal durumda aktif sorumlu tıbbi sekreter Dilara'dır.
-- Dilara izin veya geçici görevlendirme tarih aralığı girerken Medine ya da
-  Ecem'i seçmek zorundadır.
-- İzin aralığında iş hatırlatmaları yalnızca seçilen kişiye gider.
-- Psikoloğa izin tarihleri ve görevi devralan kişi bildirilir.
-- Dilara erken dönerse “Görevi geri al” işlemiyle sorumluluğu yeniden üstlenir.
-- Psikolog/Yönetici gerekirse aktif sorumluyu değiştirebilir.
-- İzinli kullanıcı sisteme girebilir ve bütün randevu işlemlerini yapabilir;
-  yalnızca iş bildirimlerini almaz.
+- İlk başarılı girişte telefona rastgele ve iptal edilebilir bir oturum verilir.
+- Oturum bilgisi `Secure`, `HttpOnly` ve `SameSite=Strict` çerezinde tutulur.
+- Düzenli kullanılan cihazın oturumu otomatik yenilenir; her açılışta PIN sorulmaz.
+- Çıkış, tarayıcı verilerinin silinmesi, telefon değişimi veya yöneticinin
+  oturumu iptal etmesi yeniden giriş gerektirir.
+- Her cihaz ayrı kaydedilir ve yönetici tarafından tek tek kapatılabilir.
 
-## Takvim ve randevular
+## 7. Veri modeli
+
+Veriler tek bir büyük JSON alanında değil, ayrı tablolarda tutulur:
+
+- `users`: kullanıcı, rol, PIN doğrulama bilgisi ve aktiflik
+- `sessions`: cihaz oturumları, son kullanım ve iptal durumu
+- `push_subscriptions`: cihaz bildirim abonelikleri
+- `clients`: danışan kimliği, görüntülenen ad ve normalize arama adı
+- `appointments`: tarih, saat, durum ve danışan bağlantısı
+- `availability_blocks`: izin, süpervizyon ve elle kapatılan zamanlar
+- `holidays`: tam ve yarım günlük resmî tatiller
+- `duty_delegations`: sorumlu sekreter ve tarih aralığı
+- `reminder_tasks`: günlük çağrı merkezi sorusu ve cevabı
+- `notification_deliveries`: bildirim gönderim ve teslim denemeleri
+- `audit_log`: ekleme, değiştirme, silme, görev devri ve yönetim işlemleri
+- `backup_registry`: oluşturulan yedekler, tarih, boyut ve doğrulama sonucu
+
+Silinen randevular fiziksel olarak hemen yok edilmez; silinmiş olarak işaretlenir
+ve normal takvim ile raporlardan çıkarılır. Hareket geçmişi değiştirilemez.
+
+Aktif randevular için tarih ve saat birleşimi veritabanı düzeyinde benzersizdir.
+İki telefon aynı anda aynı kutuyu doldurmaya çalışsa bile yalnızca biri başarılı olur.
+
+## 8. Takvim ve mobil arayüz
 
 Çalışma günleri hafta içidir. Randevu saatleri:
 
@@ -125,9 +191,36 @@ Yalnızca Psikolog/Yönetici:
 - 15.00
 - 16.00
 
-Boş saate dokunulduğunda doğrudan “Randevu ekle” penceresi açılır.
+Uygulama haftalık tabloyla açılır:
 
-Randevu durumları:
+- Pazartesi–Cuma sütunlarda yer alır.
+- Altı seans saati satırlarda yer alır.
+- Üstte önceki ve sonraki haftaya geçiş okları bulunur.
+- Dolu, boş, çift seans ve kapalı saatler hem renk hem metinle ayrılır.
+
+Bir günün başlığına, örneğin `SALI 28` üzerine dokunulduğunda günlük görünüm
+açılır. Günlük ekranda altı saat büyük ve rahat dokunulabilir kutulardır.
+`Haftalık görünüme geç` düğmesi tabloya döndürür.
+
+Boş saate dokunulduğunda ek bir seçim menüsü göstermeden doğrudan
+`Randevu ekle` penceresi açılır.
+
+Onaylanan görsel taslaklar geçici tasarım klasöründe saklanmıştır:
+
+`.superpowers/brainstorm/visual-20260727-1/content/`
+
+## 9. Danışan ve randevu kuralları
+
+### Danışan adı
+
+- Kullanıcının yazdığı ad ve soyad Türkçe büyük harfe dönüştürülür.
+- Gereksiz baş ve son boşluklar temizlenir; birden fazla boşluk teke indirilir.
+- Arama büyük/küçük harf ve Türkçe `i/İ` farkından etkilenmez.
+- Yeni randevu sırasında mevcut danışanlar önerilir.
+- Kullanıcı mevcut kişiyi seçebilir veya yeni danışan oluşturabilir.
+- Randevu yazılı isim metnine değil, kalıcı danışan kimliğine bağlanır.
+
+### Randevu durumları
 
 - Planlanmış
 - Geldi
@@ -135,79 +228,112 @@ Randevu durumları:
 - Haberli İptal
 - Habersiz İptal
 
-Randevular uygun başka bir saate taşınabilir. Her ekleme, taşıma, durum değişimi
-ve silme işlemi kullanıcı, tarih ve saat bilgisiyle işlem geçmişine yazılır.
-Veritabanı aynı tarih ve saate iki randevu kaydedilmesini engeller.
+Çift seans tek randevu kaydı ve tek takvim kutusudur. Takvimde açıkça
+`Çift Seans` görünür; gerçekleştirilen işlem sayısında bir sayılır.
 
-## Danışan kimliği ve isimler
+Randevu uygun başka bir boş saate taşınabilir. Eski ve yeni tarih ile saat
+hareket geçmişine yazılır. Düzeltme amacıyla geçmiş kayıt değiştirildiğinde de
+eski değer korunur.
 
-- Ad ve soyad Türkçe büyük harfe dönüştürülür.
-- Arama büyük/küçük harf ve Türkçe `i/İ` farkından etkilenmez.
-- Yeni randevuda mevcut danışanlar önerilir.
-- Kullanıcı mevcut kişiyi seçebilir veya yeni danışan oluşturabilir.
-- Randevular yazılı isim metnine değil, kalıcı danışan kaydına bağlanır.
-- Bu yapı farklı yazımlar yüzünden aynı danışanın birden fazla geçmişe
-  ayrılmasını önler.
+## 10. İki habersiz iptal kuralı
 
-## İki habersiz iptal kuralı
+Planlanmış gelecek randevular dikkate alınmadan danışanın sonuçlandırılmış son
+iki randevusu incelenir.
 
-Danışanın sonuçlandırılmış son iki randevusu da habersiz iptalse:
+Son iki sonuç da Habersiz İptal ise:
 
-- İkinci habersiz iptal tarihinden itibaren bir aylık kısıtlama başlar.
-- Sekreter kısıtlama sürerken randevuyu sisteme girebilir.
+- İkinci habersiz iptal tarihinden itibaren bir takvim aylık kısıtlama başlar.
+- Sekreter bu süre içinde yeni randevu kaydı oluşturabilir.
 - Seçilen randevu tarihi kısıtlama bitişinden önce olamaz.
-- Bitiş tarihi geçtiğinde uyarı kendiliğinden kalkar.
-- Kontrol danışan kimliği üzerinden yapılır; soyadı eksik yazarak aşılması
-  mümkün olmaz.
+- Örneğin ikinci iptal 5 Ağustos ise en erken 5 Eylül tarihine randevu verilebilir.
+- Süre dolduğunda uyarı otomatik kalkar.
+- Önceki durum daha sonra düzeltilirse kısıtlama yeniden hesaplanır.
 
-## Kapalı saatler ve tatiller
+Kontrol danışan kimliği üzerinden yapılır; adı farklı ya da eksik yazarak
+kısıtlamanın aşılması engellenir.
 
-- Tam günlük resmî tatiller bütün randevu saatlerini kapatır.
-- Yarım günlük resmî tatiller öğleden sonraki saatleri kapatır.
-- Psikoloğun izin aralığında kutularda “İzinli” görünür ve randevu verilemez.
-- Bir saate `SÜPERVİZYON` veya yalnızca çizgi işaretleri girilirse saat kapalı
-  ve rapor dışı kabul edilir.
-- İzin, tatil, süpervizyon ve çizgi kayıtları işlem sayılmaz.
+## 11. Resmî tatil ve uygun olmama kayıtları
 
-Resmî tatillerin yıllık veri kaynağı ve olağanüstü günler için yönetici düzeltme
-yöntemi nihai tasarım tamamlanırken kesinleştirilecektir.
+### Resmî tatiller
 
-## Günlük bildirim akışı
+- Sisteme doğrulanmış 2026–2035 Türkiye resmî tatil takvimi yerleştirilir.
+- Sabit tarihli tatiller yıllık kurallarla oluşturulur.
+- Ramazan ve Kurban Bayramı gibi değişken tarihler doğrulanmış yıllık tabloda tutulur.
+- Tam günlük tatiller bütün randevu saatlerini kapatır.
+- Arefe günleri ve 28 Ekim gibi yarım günlerde öğleden sonraki saatler kapanır.
+- Takvimde tatilin adı gösterilir.
+- Tatil verisinin son yılı yaklaşırken yöneticiye güncelleme uyarısı verilir.
+- Yönetici sonradan ilan edilen tam veya yarım günlük kapanış ekleyebilir.
 
-Bildirimler Europe/Istanbul saat diliminde ve yalnızca aktif sorumlu sekretere gider.
+Sonradan kapatılan bir saatte mevcut randevu varsa randevu silinmez. Sistem
+çakışan kayıtları yöneticiye gösterir ve taşınmasını ister.
+
+### Psikolog izni ve süpervizyon
+
+- Psikolog tarih aralığıyla izin girebilir.
+- İzinli günlerde kutularda `İzinli` görünür ve randevu verilemez.
+- Bir saat için `SÜPERVİZYON` girilirse saat kapalı kabul edilir.
+- Yalnızca çizgi işaretlerinden oluşan girişler de kapalı saat kabul edilir.
+- İzin, tatil, süpervizyon ve çizgi kayıtları hiçbir işlem raporuna girmez.
+
+## 12. Sekreter görevi ve izin devri
+
+- Varsayılan sorumlu sekreter Dilara'dır.
+- Dilara izin veya geçici görevlendirme tarih aralığı girerken Medine ya da
+  Ecem'i seçmek zorundadır.
+- İzin aralığında iş hatırlatmaları yalnızca seçilen kişiye gider.
+- Psikoloğa izin tarihleri ve görevi devralan kişi bildirilir.
+- Dilara erken dönerse `Görevi geri al` işlemiyle sorumluluğu yeniden üstlenir.
+- Bu değişiklik psikoloğa bildirilir.
+- Psikolog/Yönetici gerektiğinde aktif sorumluyu değiştirebilir.
+- İzinli kullanıcı uygulamayı açabilir ve randevu işlemlerini yapabilir; yalnızca
+  iş hatırlatmalarını almaz.
+
+## 13. Günlük bildirim akışı
+
+Bildirim zamanları Europe/Istanbul saat dilimine göre değerlendirilir.
+Yeni günlük görev yalnızca hafta içi ve tam günlük resmî tatil olmayan çalışma
+günlerinde oluşturulur.
 
 | Zaman | Davranış |
 |---|---|
-| 16.45 | “Bugünkü talepleri çağrı merkezine gönderdin mi?” |
-| 17.00 | Henüz Evet denmediyse yeniden hatırlatır. |
-| 17.15 | Hâlâ tamamlanmadıysa son hatırlatmayı gönderir. |
-| Sonraki iş günü 08.45 | Önceki tarih belirtilerek yeniden sorar. |
+| 16.45 | Aktif sorumluya “Bugünkü talepleri çağrı merkezine gönderdin mi?” bildirimi gider. |
+| 17.00 | Henüz Evet denmediyse yeniden hatırlatılır. |
+| 17.15 | Hâlâ tamamlanmadıysa son hatırlatma gönderilir. |
+| Sonraki iş günü 08.45 | Önceki tarih belirtilerek yeniden sorulur. |
 
-- Evet: Görevi kapatır ve psikoloğa tarih, cevaplayan kişi ve tamamlanma
-  bilgisi gönderir.
-- Hayır: Görevi açık bırakır.
-- Cevapsız: Görevi açık bırakır.
-- Hafta sonları ve tam günlük resmî tatiller iş günü sayılmaz.
-- Görev devri yapılırsa açık hatırlatmalar yeni sorumluya geçer.
-- Bildirim gönderimi, açılması, cevap ve cevap zamanı kaydedilir.
-- Aynı zamanlanmış kontrol tekrar çalışsa bile aynı bildirim iki kez oluşturulmaz.
-- Telefon bildirimi kapalı veya internet bağlantısı yoksa bekleyen görev uygulama
-  içinde görünür.
+Bildirim açıldığında uygulamada `Evet` ve `Hayır` düğmeleri gösterilir.
 
-## Arama
+- **Evet:** Günlük görevi kapatır; sonraki hatırlatmaları iptal eder ve
+  psikoloğa tarih, cevaplayan kişi ve tamamlanma bilgisini gönderir.
+- **Hayır:** Görevi açık bırakır.
+- **Cevapsız:** Görevi açık bırakır.
+- 17.15 sonrasında fakat 08.45'ten önce Evet verilirse sabah bildirimi gönderilmez.
+- Hafta sonları ve tam günlük resmî tatiller sonraki iş günü hesabına girmez.
+- Ertesi gün sorusu ilgili eski tarihi açıkça içerir.
+- Görev devri sırasında açık görevler de yeni sorumluya geçer.
 
-Arama bütün kullanıcılara açıktır. Danışan ekranında:
+Her tarih için yalnızca bir günlük görev vardır. Zamanlanmış kontrol tekrar
+çalışsa bile aynı bildirim aynı aşama için iki kez oluşturulmaz. Gönderim
+denemesi, cevap, cevaplayan kişi ve zaman kayıt altına alınır.
 
-- Yaklaşan randevular en yakın tarihten başlayarak,
-- Geçmiş randevular en yeniden eskiye doğru,
-- Tarih, saat ve durum bilgileriyle
+Bildirim kapalı veya telefon çevrimdışıysa teslim garantisi yoktur. Açık görev
+uygulamada görünmeye devam eder ve bildirim izni kapalıysa kullanıcı uyarılır.
 
-gösterilir. Aktif habersiz iptal kısıtlamasının bitiş tarihi de gösterilir.
+## 14. Danışan araması
 
-## Rapor
+Arama bütün kullanıcılara açıktır. Danışan seçildiğinde:
 
-Rapor yalnızca Psikolog/Yönetici hesabında görünür. Ay veya özel tarih aralığı
-seçilebilir.
+- Yaklaşan randevular en yakın tarihten başlayarak gösterilir.
+- Geçmiş randevular en yeniden eskiye doğru gösterilir.
+- Her satırda tarih, saat ve durum bulunur.
+- Aktif habersiz iptal kısıtlamasının bitiş tarihi gösterilir.
+
+## 15. Raporlama
+
+Rapor ekranı ve rapor API'leri yalnızca Psikolog/Yönetici rolüne açıktır.
+Ay veya özel tarih aralığı seçilebilir. Filtre, kaydın oluşturulduğu tarihe
+değil seans tarihine uygulanır.
 
 Ayrı sayımlar:
 
@@ -218,7 +344,7 @@ Ayrı sayımlar:
 - Planlanmış
 - Gerçekleştirilen İşlem
 
-Gerçekleştirilen işlem hesabı:
+Gerçekleştirilen İşlem hesabı:
 
 - Geldi = 1
 - Çift Seans = 1
@@ -226,63 +352,162 @@ Gerçekleştirilen işlem hesabı:
 - Habersiz İptal = 0
 - Planlanmış = 0
 
-Süpervizyon, izin, tatil ve çizgiyle kapatılan saatler hiçbir işlem sayımına
-girmez. Tarih filtresi kaydın oluşturulma tarihine değil, seans tarihine göre
-çalışır.
+İzin, tatil, süpervizyon, çizgiyle kapatılan saatler ve silinen randevular
+rapora girmez.
 
-PDF ve Excel çıktılarında danışan adı soyadı, seans tarihi, saati ve durumu
-bulunur. Excel dosyasında özet ve ayrıntı ayrı sayfalarda yer alır.
+### Dışa aktarma
 
-## Onaylanan mobil takvim arayüzü
+- **PDF:** Yazdırılabilir özet ve ayrıntılı randevu listesi
+- **Excel:** Ayrı özet ve ayrıntı sayfaları
 
-Uygulama açıldığında varsayılan görünüm haftalık tablodur:
+Ayrıntıda danışan adı soyadı, seans tarihi, saati ve durumu bulunur. Türkçe
+karakterlerin PDF ve Excel'de bozulmaması doğrulanır.
 
-- Beş hafta içi günü sütunlarda
-- Altı seans saati satırlarda
-- Önceki ve sonraki haftaya geçiş okları üst bölümde
-- Dolu, boş, çift seans ve kapalı saatler renk ve metinle ayırt edilir
+## 16. Hareket geçmişi
 
-Gün başlığına, örneğin “SALI 28” üzerine dokunulduğunda günlük görünüm açılır.
-Günlük görünümde altı saat büyük ve rahat dokunulabilir kutular olarak yer alır.
-Üstteki “Haftalık görünüme geç” düğmesi kullanıcıyı haftalık tabloya geri götürür.
+Değiştirilemeyen hareket kaydı en az şu olayları tutar:
 
-Görsel taslaklar geçici çalışma alanında korunmaktadır:
+- Randevu oluşturma
+- Randevu taşıma
+- Durum değiştirme
+- Randevu silme
+- Danışan oluşturma veya birleştirme
+- İzin ve uygun olmama kaydı
+- Görev devri ve erken dönüş
+- Kullanıcı ve PIN yönetimi
+- Cihaz oturumu iptali
+- Yedek oluşturma ve geri yükleme
 
-`.superpowers/brainstorm/visual-20260727-1/content/`
+Her kayıtta işlemi yapan kullanıcı, zaman, işlem türü, önceki değer ve yeni değer
+bulunur. Hareket geçmişi yalnızca yönetici tarafından görüntülenebilir.
 
-## Onay bekleyen veri taşıma ve güvenilirlik tasarımı
+## 17. Önbellek, çevrimdışı kullanım ve hatalar
 
-Kullanıcıya son olarak şu yaklaşım sunuldu:
+- PWA yalnızca sürümlenmiş ekran ve simge dosyalarını önbelleğe alır.
+- Danışan, randevu ve rapor API cevapları `no-store` olarak gönderilir.
+- Kişisel veriler cihazda kalıcı çevrimdışı veri olarak saklanmaz.
+- Uygulama kabuğu çevrimdışı açılabilir fakat veri göstermez ve işlem yaptırmaz.
+- Çevrimdışıyken yazma işlemi sıraya alınmaz.
+- Kullanıcıya `İnternet bağlantısı yok; hiçbir değişiklik kaydedilmedi` mesajı verilir.
+- Başarısız işlem, veritabanı onayı gelmeden takvimde başarılı gösterilmez.
+- Sunucu hatası anlaşılır açıklama ve kişisel veri içermeyen takip numarası üretir.
+- Oturum geçersizse veri göstermeden giriş ekranına döner.
+- Saat başka kullanıcı tarafından doldurulmuşsa takvim yenilenir ve yeni saat istenir.
+- Yeni uygulama sürümü çıktığında eski statik önbellek değiştirilir ve gerekirse
+  `Yeni sürüm hazır` bildirimi gösterilir.
 
-1. Eski sistemin geçmiş ve gelecek bütün randevuları yedeklenir.
-2. İsim, tarih, saat ve durumlar D1 veritabanına dönüştürülür.
-3. Aynı danışan yazımları birleştirilir.
-4. Şüpheli tekrarlar ve saat çakışmaları inceleme listesine alınır; kayıt silinmez.
-5. Eski ve yeni sistemin toplamları ile durum dağılımları karşılaştırılır.
-6. Kullanıcı doğrulamasından sonra yeni uygulama açılır.
-7. Eski uygulama bir süre kontrol amacıyla korunur.
+## 18. Yedekleme ve geri yükleme
 
-Önerilen güvenilirlik kuralları:
+### Kısa dönem
 
-- Yalnızca uygulama ekranı önbelleğe alınır; randevular güncel veritabanından okunur.
-- Yeni sürüm eski ekran önbelleğini otomatik değiştirir.
-- Başarı gösterilmeden önce veritabanı kaydı doğrulanır.
-- İnternet yokken randevu işlemi sıraya alınmış gibi gösterilmez.
-- Çakışan saat ve kapalı gün hataları kullanıcıya açıkça anlatılır.
-- Düzenli geri dönüş noktaları ve indirilebilir tam yedek bulunur.
-- Eşzamanlı işlemler, tarih geçişleri, bildirim zinciri, rapor sayımları,
-  iPhone bildirimi ve veri taşıma ayrı ayrı sınanır.
+Cloudflare D1'in ücretsiz planda otomatik çalışan yedi günlük noktasal geri
+dönüş özelliği kullanılır.
 
-Bu bölüm yarın onaylanmalı veya kullanıcının isteğine göre değiştirilmelidir.
+### Uzun dönem
 
-## Nihai tasarımdan önce kalan kararlar
+- Her gece D1 verisinin şifreli yedeği R2'ye yazılır.
+- Yedek şifreleme kurtarma anahtarı Cloudflare uygulama sırlarından ayrı,
+  çevrimdışı bir kurtarma kaydı olarak yöneticiye teslim edilir.
+- Günlük yedekler 90 gün saklanır.
+- Her ayın son yedeği 12 ay saklanır.
+- Canlı randevu geçmişi kullanıcı silmediği sürece süresizdir.
+- Süresi dolan yedekler otomatik temizlenir.
+- Yedek oluşturulduktan sonra bütünlük kontrolü yapılır.
+- Başarısız yedek yöneticiye uygulama içi uyarı ve push bildirimi üretir.
 
-1. Veri taşıma ve hata güvenliği bölümünün onayı
-2. Kalıcı uygulama adresi: ücretsiz `workers.dev` adresi veya mevcut bir alan
-   adından özel alt alan adı
-3. Resmî tatil verisinin güncellenme ve yönetici düzeltme yöntemi
-4. Yedek saklama süresi ve geri yükleme işleminin kesin biçimi
-5. Son hata durumları ve kabul testlerinin nihai onayı
+Yönetici yedek tarihini, boyutunu ve doğrulama durumunu görebilir. Yedek indirme
+işleminde yönetici PIN'i yeniden sorulur ve indirme hareket geçmişine yazılır.
 
-Bu kararların ardından belge nihai tasarım olarak düzenlenecek, tutarlılık
-kontrolünden geçirilecek ve uygulama planı hazırlanacaktır.
+Geri yükleme:
+
+1. Yalnızca yönetici başlatabilir.
+2. Yönetici PIN'i yeniden sorulur.
+3. İkinci ve açık bir onay gösterilir.
+4. Uygulama kısa süreli bakım moduna alınarak yeni yazma işlemleri durdurulur.
+5. Mevcut durumun güvenlik yedeği alınır.
+6. Seçilen yedek geri yüklenir.
+7. Sonuç doğrulanır, bakım modu kapatılır ve işlem hareket geçmişine yazılır.
+
+## 19. Mevcut verilerin taşınması
+
+1. Mevcut Google Apps Script verisi salt okunur bir dışa aktarımla yedeklenir.
+2. Geçmiş ve gelecek bütün randevular dönüştürme aracına alınır.
+3. Adlar Türkçe normalizasyon kurallarına göre hazırlanır.
+4. Aynı normalize tam ada sahip kayıtlar bir danışan adayı altında gruplanır.
+5. Benzer fakat kesin olmayan isimler kullanıcı inceleme listesine alınır.
+6. Kullanıcı gerekirse aynı adlı kişileri ayrı bırakabilir veya kayıtları birleştirebilir.
+7. Geçersiz tarih, bilinmeyen durum ve aynı saat çakışmaları ayrı listelenir.
+8. Hiçbir sorunlu kayıt sessizce silinmez.
+9. Yeni sistemde toplam randevu sayısı ve durum dağılımı eski yedekle karşılaştırılır.
+10. Kullanıcı örnek geçmiş ve gelecek randevuları kontrol eder.
+11. Kullanıcı doğrulamasından sonra yeni sistem kullanıma açılır.
+
+Geçiş sırasında eski sistem yeni kayıt girişine kısa süreli kapatılır. Son yedek
+ve aktarım tamamlandıktan sonra eski uygulama en az 30 gün salt okunur kontrol
+amacıyla korunur.
+
+## 20. Test yaklaşımı
+
+İş kuralları otomatik testlerle; bildirim ve iPhone davranışı gerçek cihaz
+testleriyle doğrulanır.
+
+### Otomatik testler
+
+- Türkçe ad normalizasyonu ve arama
+- Randevu ekleme, taşıma, silme ve durum değişimi
+- Eşzamanlı aynı saat kaydı
+- İki habersiz iptal ve bir aylık tarih hesabı
+- Durum düzeltildiğinde kısıtlamanın yeniden hesaplanması
+- Tam ve yarım gün tatiller
+- İzin, süpervizyon ve çizgi girişleri
+- Görev devri ve erken dönüş
+- 16.45, 17.00, 17.15 ve 08.45 zaman akışı
+- Aynı bildirimin iki kez üretilmemesi
+- Rapor yetkisi ve bütün sayım kuralları
+- Çift seansın bir işlem sayılması
+- PDF ve Excel içeriği
+- Yedek bütünlüğü ve deneme geri yüklemesi
+- Yetkisiz API erişimlerinin reddedilmesi
+- Önbellek ve sürüm yenileme davranışı
+
+### Gerçek cihaz kabul testleri
+
+- Dört ayrı kullanıcı hesabıyla giriş
+- Aynı telefonda kalıcı oturum
+- Yönetici tarafından cihaz oturumu iptali
+- iPhone ana ekranına ekleme
+- Uygulama kapalıyken push bildirimi
+- Bildirim açıldığında doğru tarihli görev ekranı
+- Bildirim izni kapalı uyarısı
+- İki telefondan eşzamanlı randevu denemesi
+- PDF ve Excel dosyalarının telefondan indirilmesi
+
+## 21. Kullanıma geçiş
+
+1. Sistem deneme verileriyle Cloudflare üzerinde yayımlanır.
+2. Önce Psikolog/Yönetici hesabı ve telefonu kurulur.
+3. Dilara, Medine ve Ecem hesapları ile cihazları kurulur.
+4. Bildirim izinleri ve test bildirimleri doğrulanır.
+5. Bütün otomatik ve gerçek cihaz testleri tamamlanır.
+6. Eski veri yedeklenir ve yeni sisteme aktarılır.
+7. Sayımlar ve örnek danışan geçmişleri kullanıcı tarafından doğrulanır.
+8. Yeni sistem üretim kullanımına açılır.
+9. Eski sistem en az 30 gün salt okunur tutulur.
+
+## 22. Başarı ölçütleri
+
+Sistem ancak aşağıdakilerin tamamı doğrulandığında hazır kabul edilir:
+
+- Randevu değişiklikleri kaybolmaz ve eşzamanlı işlemler birbirini ezmez.
+- Kullanıcılar aynı iPhone'da tekrar tekrar giriş yapmak zorunda kalmaz.
+- Yetkisiz kullanıcı rapor ve yönetim verilerine erişemez.
+- İzinli sekretere iş bildirimi gitmez.
+- Bildirimler doğru kişiye ve doğru zamanda gider.
+- Uygulama kapalıyken iPhone bildirimi alınır.
+- Habersiz iptal kısıtlaması doğru tarihte başlar ve biter.
+- Tatil, izin ve kapalı saatlere randevu verilemez.
+- Danışan araması geçmiş ve gelecek kayıtları doğru gösterir.
+- Çift seans raporda bir gerçekleştirilen işlem sayılır.
+- PDF ve Excel sonuçları ekrandaki sayımlarla eşleşir.
+- Eski verilerin toplamı ve durum dağılımı yeni sistemle eşleşir.
+- Yedek alınabilir ve deneme ortamında başarıyla geri yüklenebilir.
