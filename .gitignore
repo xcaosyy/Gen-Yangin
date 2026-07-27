@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # temporary brainstorming companion sessions
 .superpowers/
+
+# isolated feature worktrees
+.worktrees/
